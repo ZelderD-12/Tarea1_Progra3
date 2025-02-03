@@ -27,6 +27,7 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -101,6 +102,9 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         jButton10.setText("jButton10");
         jPanel1.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 490, 130, -1));
 
+        jButton11.setText("jButton11");
+        jPanel1.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 420, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -156,6 +160,7 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     private javax.swing.JTable Jtablaprincipal;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
