@@ -10,7 +10,7 @@ public class Tarea1 {
         ++
         6+6+6+6+6+9+96+98++98+659+8
         */
-       
+       //comentario mas
       Frmventanaprincipal ventana1 = new Frmventanaprincipal();
       ventana1.setLocationRelativeTo(null);
       ventana1.setVisible(true);
