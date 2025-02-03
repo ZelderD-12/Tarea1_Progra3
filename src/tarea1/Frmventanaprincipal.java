@@ -54,6 +54,11 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 430, 130, -1));
 
         jButton3.setText("Crear");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, 200, -1));
 
         jButton4.setText("jButton4");
@@ -109,6 +114,10 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        System.out.println("HOla GUstavo");
+    }//GEN-LAST:event_jButton3ActionPerformed
 
    
     public static void main(String args[]) {
