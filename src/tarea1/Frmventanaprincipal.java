@@ -1,9 +1,20 @@
 package tarea1;
 
-public class Frmventanaprincipal extends javax.swing.JFrame {
+import java.util.Arrays;
+import java.util.List;
 
+public class Frmventanaprincipal extends javax.swing.JFrame {
+        List<String> listaCanciones = Arrays.asList(
+                "music/claro.wav",
+                "music/wiisport60.wav",
+                "music/elevadorcus.wav"
+        );
+        
+        ReproducirCancion reproductor = new ReproducirCancion(listaCanciones);
+        Thread hiloReproduccion = new Thread(reproductor);
    
     public Frmventanaprincipal() {
+        //hiloReproduccion.start();
         initComponents();
     }
 
