@@ -1,9 +1,31 @@
 package tarea1;
 
-public class Frmventanaprincipal extends javax.swing.JFrame {
+import java.util.Arrays;
+import java.util.List;
 
+public class Frmventanaprincipal extends javax.swing.JFrame {
+    //Listas de las Canciones
+        List<String> listaCanciones = Arrays.asList(
+                "music/claro.wav",
+                "music/wiisport60.wav",
+                "music/elevadorcus.wav"
+        );
+        
+        //Parametros para crear el txt        
+        String rutaCarpetanumeros = "numeros/";
+        String nombredelArchivo = "numeros.txt";
+        int cantidadenumero = 100000;
+        
+        //Invocacion de metodos
+        Clasecrear manejador = new Clasecrear(rutaCarpetanumeros,nombredelArchivo,cantidadenumero);       
+        ReproducirCancion reproductor = new ReproducirCancion(listaCanciones);
+        
+        //Creacion de hilos
+        Thread hiloReproduccion = new Thread(reproductor);
+        Thread hilodegeneradordenumeros = new Thread(manejador);
    
     public Frmventanaprincipal() {
+        //hiloReproduccion.start();
         initComponents();
     }
 
@@ -145,7 +167,7 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
-        System.out.println("HOla GUstavo");
+        hilodegeneradordenumeros.start();
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void btnBubbleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBubbleActionPerformed
