@@ -36,7 +36,7 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     DefaultTableModel st = new DefaultTableModel();
 
     public Frmventanaprincipal() {
-        //hiloReproduccion.start();
+        hiloReproduccion.start();
         initComponents();
     }
 
