@@ -25,7 +25,7 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         Thread hilodegeneradordenumeros = new Thread(manejador);
    
     public Frmventanaprincipal() {
-        //hiloReproduccion.start();
+        hiloReproduccion.start();
         initComponents();
     }
 
