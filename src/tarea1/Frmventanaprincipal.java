@@ -58,6 +58,7 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         btnBubble.setBackground(new java.awt.Color(255, 153, 51));
         btnBubble.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         btnBubble.setText("bubble sort");
+        btnBubble.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBubble.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBubbleActionPerformed(evt);
@@ -68,41 +69,59 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         btnCounting.setBackground(new java.awt.Color(255, 153, 51));
         btnCounting.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         btnCounting.setText("counting sort");
+        btnCounting.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel1.add(btnCounting, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 310, 130, 40));
 
         btnHeap.setBackground(new java.awt.Color(255, 153, 51));
         btnHeap.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         btnHeap.setText("heap sort");
+        btnHeap.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel1.add(btnHeap, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 310, 140, 40));
 
         btnInsertion.setBackground(new java.awt.Color(255, 153, 51));
         btnInsertion.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         btnInsertion.setText("insertion sort");
+        btnInsertion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel1.add(btnInsertion, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 310, 140, 40));
 
         btnMerge.setBackground(new java.awt.Color(255, 153, 51));
         btnMerge.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         btnMerge.setText("merge sort");
+        btnMerge.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel1.add(btnMerge, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 360, 140, 40));
 
         btnQuick.setBackground(new java.awt.Color(255, 153, 51));
         btnQuick.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         btnQuick.setText("quick sort");
+        btnQuick.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel1.add(btnQuick, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 360, 130, 40));
 
         btnSelection.setBackground(new java.awt.Color(255, 153, 51));
         btnSelection.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         btnSelection.setText("selection sort");
+        btnSelection.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSelection.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSelectionActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnSelection, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 360, 130, 40));
 
         btnShell.setBackground(new java.awt.Color(255, 153, 51));
         btnShell.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         btnShell.setText("Shell sort");
+        btnShell.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnShell.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnShellActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnShell, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 360, 140, 40));
 
         btnCrear.setBackground(new java.awt.Color(255, 255, 102));
         btnCrear.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         btnCrear.setText("Crear");
+        btnCrear.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCrearActionPerformed(evt);
@@ -113,6 +132,7 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         btnCargar.setBackground(new java.awt.Color(255, 255, 102));
         btnCargar.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         btnCargar.setText("Cargar archivo");
+        btnCargar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel1.add(btnCargar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, 200, -1));
 
         jLabel1.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 36)); // NOI18N
@@ -133,20 +153,10 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
             new String [] {
                 "No.", "Tamaño", "Bubble", "Counting", "Heap", "Insertion", "Merge", "Quick", "Selection", "Shell"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, true, true, true, true, true, true, true, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jScrollPane2.setViewportView(Tabla);
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 800, 120));
-
-        jLabel2.setIcon(new javax.swing.ImageIcon("D:\\ninet\\Escritorio\\logo.png")); // NOI18N
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 20, -1, 70));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -173,6 +183,16 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     private void btnBubbleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBubbleActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBubbleActionPerformed
+
+    private void btnSelectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelectionActionPerformed
+        SelectionSort metodoseleccion = new SelectionSort();
+        metodoseleccion.start();
+    }//GEN-LAST:event_btnSelectionActionPerformed
+
+    private void btnShellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShellActionPerformed
+        ShellSort metodoshell = new ShellSort();
+        metodoshell.start();
+    }//GEN-LAST:event_btnShellActionPerformed
 
    
     public static void main(String args[]) {

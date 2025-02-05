@@ -7,5 +7,7 @@ public class Tarea1 {
       Frmventanaprincipal ventana1 = new Frmventanaprincipal();
       ventana1.setLocationRelativeTo(null);
       ventana1.setVisible(true);
+      
+      
     }   
 }
