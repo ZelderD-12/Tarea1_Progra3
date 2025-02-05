@@ -1,10 +1,43 @@
 package tarea1;
 
-public class Frmventanaprincipal extends javax.swing.JFrame {
+import java.util.Arrays;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
-   
+public class Frmventanaprincipal extends javax.swing.JFrame {
+    //Listas de las Canciones
+        List<String> listaCanciones = Arrays.asList(
+                "music/claro.wav",
+                "music/wiisport60.wav",
+                "music/elevadorcus.wav"
+        );
+        
+        //Parametros para crear el txt        
+        String rutaCarpetanumeros = "numeros/";
+        String nombredelArchivo = "numeros.txt";
+        int cantidadenumero = 100000;
+        
+        //Invocacion de metodos
+        Clasecrear manejador = new Clasecrear(rutaCarpetanumeros,nombredelArchivo,cantidadenumero);       
+        ReproducirCancion reproductor = new ReproducirCancion(listaCanciones);
+        
+        //Creacion de hilos
+        Thread hiloReproduccion = new Thread(reproductor);
+        Thread hilodegeneradordenumeros = new Thread(manejador);
+        
+        
+        DefaultTableModel st  = new DefaultTableModel ();
     public Frmventanaprincipal() {
+        //hiloReproduccion.start();
         initComponents();
+        String[] title = {"No.", "Tamaño", "Bubble", "Counting", "Heap", "Insertion", "Merge", "Quick", "Selection", "Shell"};
+        st = new DefaultTableModel(title, 0);
+        Tabla.setModel(st);
+        int num = 1;
+        for (int i = 0; i <= 1000000; i++) {
+            st.addRow(new Object[]{num, null, null, null, null, null, null, null, null, null});
+            num++;
+        }
     }
 
    
@@ -13,193 +46,164 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnBubble = new javax.swing.JButton();
+        btnCounting = new javax.swing.JButton();
+        btnHeap = new javax.swing.JButton();
+        btnInsertion = new javax.swing.JButton();
+        btnMerge = new javax.swing.JButton();
+        btnQuick = new javax.swing.JButton();
+        btnSelection = new javax.swing.JButton();
+        btnShell = new javax.swing.JButton();
+        btnCrear = new javax.swing.JButton();
+        btnCargar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        Jtablaprincipal = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        logo = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        Tabla = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(51, 255, 51));
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 940, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 40, Short.MAX_VALUE)
-        );
-
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 560, 940, 40));
-
-        jPanel3.setBackground(new java.awt.Color(51, 153, 255));
-
-        jButton3.setBackground(new java.awt.Color(255, 255, 102));
-        jButton3.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
-        jButton3.setText("Crear");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnBubble.setBackground(new java.awt.Color(255, 153, 51));
+        btnBubble.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
+        btnBubble.setText("bubble sort");
+        btnBubble.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnBubble.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnBubbleActionPerformed(evt);
             }
         });
+        jPanel1.add(btnBubble, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, 130, 40));
 
-        jButton5.setBackground(new java.awt.Color(255, 255, 102));
-        jButton5.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
-        jButton5.setText("Cargar archivo");
+        btnCounting.setBackground(new java.awt.Color(255, 153, 51));
+        btnCounting.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
+        btnCounting.setText("counting sort");
+        btnCounting.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel1.add(btnCounting, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 310, 130, 40));
 
-        jLabel1.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
+        btnHeap.setBackground(new java.awt.Color(255, 153, 51));
+        btnHeap.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
+        btnHeap.setText("heap sort");
+        btnHeap.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel1.add(btnHeap, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 310, 140, 40));
+
+        btnInsertion.setBackground(new java.awt.Color(255, 153, 51));
+        btnInsertion.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
+        btnInsertion.setText("insertion sort");
+        btnInsertion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel1.add(btnInsertion, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 310, 140, 40));
+
+        btnMerge.setBackground(new java.awt.Color(255, 153, 51));
+        btnMerge.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
+        btnMerge.setText("merge sort");
+        btnMerge.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel1.add(btnMerge, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 360, 140, 40));
+
+        btnQuick.setBackground(new java.awt.Color(255, 153, 51));
+        btnQuick.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
+        btnQuick.setText("quick sort");
+        btnQuick.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel1.add(btnQuick, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 360, 130, 40));
+
+        btnSelection.setBackground(new java.awt.Color(255, 153, 51));
+        btnSelection.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
+        btnSelection.setText("selection sort");
+        btnSelection.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnSelection.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSelectionActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnSelection, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 360, 130, 40));
+
+        btnShell.setBackground(new java.awt.Color(255, 153, 51));
+        btnShell.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
+        btnShell.setText("Shell sort");
+        btnShell.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnShell.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnShellActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnShell, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 360, 140, 40));
+
+        btnCrear.setBackground(new java.awt.Color(255, 255, 102));
+        btnCrear.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
+        btnCrear.setText("Crear");
+        btnCrear.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 200, -1));
+
+        btnCargar.setBackground(new java.awt.Color(255, 255, 102));
+        btnCargar.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
+        btnCargar.setText("Cargar archivo");
+        btnCargar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel1.add(btnCargar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, 200, -1));
+
+        jLabel1.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Null");
+        jLabel1.setText("Universidad Mariano Galvéz");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 40, 410, 30));
 
-        Jtablaprincipal.setModel(new javax.swing.table.DefaultTableModel(
+        Tabla.setFont(new java.awt.Font("Tw Cen MT", 0, 11)); // NOI18N
+        Tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {},
-                {},
-                {},
-                {}
+                {"", "", null, null, null, null, null, null, null, null},
+                {"", "", null, null, null, null, null, null, null, null},
+                {"", "", null, null, null, null, null, null, null, null},
+                {"", "", null, null, null, null, null, null, null, null},
+                {"", "", null, null, null, null, null, null, null, null},
+                {"", "", null, null, null, null, null, null, null, null}
             },
             new String [] {
-
+                "No.", "Tamaño", "Bubble", "Counting", "Heap", "Insertion", "Merge", "Quick", "Selection", "Shell"
             }
         ));
-        jScrollPane1.setViewportView(Jtablaprincipal);
+        jScrollPane2.setViewportView(Tabla);
 
-        jButton1.setBackground(new java.awt.Color(255, 153, 51));
-        jButton1.setFont(new java.awt.Font("Tw Cen MT", 0, 14)); // NOI18N
-        jButton1.setText("bubble sort");
-
-        jButton6.setBackground(new java.awt.Color(255, 153, 51));
-        jButton6.setFont(new java.awt.Font("Tw Cen MT", 0, 14)); // NOI18N
-        jButton6.setText("merge sort");
-
-        jButton2.setBackground(new java.awt.Color(255, 153, 51));
-        jButton2.setFont(new java.awt.Font("Tw Cen MT", 0, 14)); // NOI18N
-        jButton2.setText("counting sort");
-
-        jButton7.setBackground(new java.awt.Color(255, 153, 51));
-        jButton7.setFont(new java.awt.Font("Tw Cen MT", 0, 14)); // NOI18N
-        jButton7.setText("quick sort");
-
-        jButton8.setBackground(new java.awt.Color(255, 153, 51));
-        jButton8.setFont(new java.awt.Font("Tw Cen MT", 0, 14)); // NOI18N
-        jButton8.setText("heap sort");
-
-        jButton9.setBackground(new java.awt.Color(255, 153, 0));
-        jButton9.setFont(new java.awt.Font("Tw Cen MT", 0, 14)); // NOI18N
-        jButton9.setText("selection sort");
-
-        jButton4.setFont(new java.awt.Font("Tw Cen MT", 0, 14)); // NOI18N
-        jButton4.setText("insertion sort");
-
-        jButton10.setFont(new java.awt.Font("Tw Cen MT", 0, 14)); // NOI18N
-        jButton10.setText("Shell sort");
-
-        logo.setText("jLabel2");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(90, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 820, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(157, 157, 157)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton5)
-                        .addGap(53, 53, 53)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2)
-                            .addComponent(jButton7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton8)
-                            .addComponent(jButton9))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton4)
-                            .addComponent(jButton10)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 2, Short.MAX_VALUE))
-        );
-
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 920, 540));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 800, 120));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 20, -1, 70));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 882, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        System.out.println("HOla GUstavo");
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
+        hilodegeneradordenumeros.start();
+    }//GEN-LAST:event_btnCrearActionPerformed
+
+    private void btnBubbleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBubbleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBubbleActionPerformed
+
+    private void btnSelectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelectionActionPerformed
+        SelectionSort metodoseleccion = new SelectionSort();
+        metodoseleccion.start();
+    }//GEN-LAST:event_btnSelectionActionPerformed
+
+    private void btnShellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShellActionPerformed
+        ShellSort metodoshell = new ShellSort();
+        metodoshell.start();
+    }//GEN-LAST:event_btnShellActionPerformed
 
    
     public static void main(String args[]) {
@@ -235,22 +239,20 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable Jtablaprincipal;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
+    private javax.swing.JTable Tabla;
+    private javax.swing.JButton btnBubble;
+    private javax.swing.JButton btnCargar;
+    private javax.swing.JButton btnCounting;
+    private javax.swing.JButton btnCrear;
+    private javax.swing.JButton btnHeap;
+    private javax.swing.JButton btnInsertion;
+    private javax.swing.JButton btnMerge;
+    private javax.swing.JButton btnQuick;
+    private javax.swing.JButton btnSelection;
+    private javax.swing.JButton btnShell;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel logo;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }
