@@ -40,45 +40,41 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         initComponents();
     }
 
-public void cargarTabla(ArrayList<Integer> numeros) {
-    // Crear la tabla con el número total de filas que corresponde al número de elementos
-    String[] title = {"No.", "Tamaño", "Bubble", "Counting", "Heap", "Insertion", "Merge", "Quick", "Selection", "Shell"};
-    st = new DefaultTableModel(title, 0);
-    Tabla.setModel(st);
+    public void cargarTabla(ArrayList<Integer> numeros) {
+        // Crear la tabla con el número total de filas que corresponde al número de elementos
+        String[] title = {"No.", "Tamaño", "Bubble", "Counting", "Heap", "Insertion", "Merge", "Quick", "Selection", "Shell"};
+        st = new DefaultTableModel(title, 0);
+        Tabla.setModel(st);
 
-    int num = 1;
-    int currentSizeGroup = 1000;  // Empezamos con 1,000
-    int totalSize = numeros.size();  // Total de números en la lista
+        int num = 1;
+        int currentSizeGroup = 1000;  // Empezamos con 1,000
+        int totalSize = numeros.size();  // Total de números en la lista
 
-    // Lista para almacenar los grupos generados
-    ArrayList<Integer> grupos = new ArrayList<>();
+        // Lista para almacenar los grupos generados
+        ArrayList<Integer> grupos = new ArrayList<>();
 
-    // Generar grupos hasta acercarnos a totalSize
-    while (currentSizeGroup < totalSize) {
-        grupos.add(currentSizeGroup);
-        
-        // Ajustar el tamaño del grupo para la siguiente iteración
-        if (currentSizeGroup < 1000000) {
-            currentSizeGroup *= 10;  // Escalamos en potencias de 10
-        } else {
-            currentSizeGroup += 1000000;  // A partir de 1 millón, incrementamos en 1 millón
+        // Generar grupos hasta acercarnos a totalSize
+        while (currentSizeGroup < totalSize) {
+            grupos.add(currentSizeGroup);
+
+            // Ajustar el tamaño del grupo para la siguiente iteración
+            if (currentSizeGroup < 1000000) {
+                currentSizeGroup *= 10;  // Escalamos en potencias de 10
+            } else {
+                currentSizeGroup += 1000000;  // A partir de 1 millón, incrementamos en 1 millón
+            }
+        }
+
+        // Redondear el último grupo para que totalSize sea exacto
+        if (!grupos.isEmpty() && grupos.get(grupos.size() - 1) != totalSize) {
+            grupos.set(grupos.size() - 1, totalSize);
+        }
+
+        // Insertar los grupos en la tabla
+        for (int size : grupos) {
+            st.addRow(new Object[]{num++, size, null, null, null, null, null, null, null, null});
         }
     }
-
-    // Redondear el último grupo para que totalSize sea exacto
-    if (!grupos.isEmpty() && grupos.get(grupos.size() - 1) != totalSize) {
-        grupos.set(grupos.size() - 1, totalSize);
-    }
-
-    // Insertar los grupos en la tabla
-    for (int size : grupos) {
-        st.addRow(new Object[]{num++, size, null, null, null, null, null, null, null, null});
-    }
-}
-
-
-
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
