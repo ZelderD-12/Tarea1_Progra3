@@ -130,25 +130,17 @@ public void cargarTabla(ArrayList<Integer> numeros) {
         Tabla.setFont(new java.awt.Font("Tw Cen MT", 0, 11)); // NOI18N
         Tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"1.", "", null, null, null, null, null, null, null, null},
-                {"2.", "", null, null, null, null, null, null, null, null},
-                {"3.", "", null, null, null, null, null, null, null, null},
-                {"4.", "", null, null, null, null, null, null, null, null},
-                {"5.", "", null, null, null, null, null, null, null, null},
-                {"6.", "", null, null, null, null, null, null, null, null}
+                {"", "", null, null, null, null, null, null, null, null},
+                {"", "", null, null, null, null, null, null, null, null},
+                {"", "", null, null, null, null, null, null, null, null},
+                {"", "", null, null, null, null, null, null, null, null},
+                {"", "", null, null, null, null, null, null, null, null},
+                {"", "", null, null, null, null, null, null, null, null}
             },
             new String [] {
                 "No.", "Tamaño", "Bubble", "Counting", "Heap", "Insertion", "Merge", "Quick", "Selection", "Shell"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, true, true, true, true, true, true, true, true, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jScrollPane2.setViewportView(Tabla);
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 800, 120));
