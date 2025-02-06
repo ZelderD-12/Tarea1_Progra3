@@ -1,46 +1,85 @@
 package tarea1;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class Frmventanaprincipal extends javax.swing.JFrame {
+
     //Listas de las Canciones
-        List<String> listaCanciones = Arrays.asList(
-                "music/claro.wav",
-                "music/wiisport60.wav",
-                "music/elevadorcus.wav"
-        );
-        
-        //Parametros para crear el txt        
-        String rutaCarpetanumeros = "numeros/";
-        String nombredelArchivo = "numeros.txt";
-        int cantidadenumero = 100000;
-        
-        //Invocacion de metodos
-        Clasecrear manejador = new Clasecrear(rutaCarpetanumeros,nombredelArchivo,cantidadenumero);       
-        ReproducirCancion reproductor = new ReproducirCancion(listaCanciones);
-        
-        //Creacion de hilos
-        Thread hiloReproduccion = new Thread(reproductor);
-        Thread hilodegeneradordenumeros = new Thread(manejador);
-        
-        
-        DefaultTableModel st  = new DefaultTableModel ();
+    List<String> listaCanciones = Arrays.asList(
+            "music/claro.wav",
+            "music/wiisport60.wav",
+            "music/elevadorcus.wav"
+    );
+
+    //Parametros para crear el txt        
+    String rutaCarpetanumeros = "numeros/";
+    String nombredelArchivo = "numeros.txt";
+    int cantidadenumero = 100000;
+
+    //Invocacion de metodos
+    Clasecrear manejador = new Clasecrear(rutaCarpetanumeros, nombredelArchivo, cantidadenumero);
+    ReproducirCancion reproductor = new ReproducirCancion(listaCanciones);
+
+    //Creacion de hilos
+    Thread hiloReproduccion = new Thread(reproductor);
+    Thread hilodegeneradordenumeros = new Thread(manejador);
+
+    DefaultTableModel st = new DefaultTableModel();
+
     public Frmventanaprincipal() {
         //hiloReproduccion.start();
         initComponents();
-        String[] title = {"No.", "Tamaño", "Bubble", "Counting", "Heap", "Insertion", "Merge", "Quick", "Selection", "Shell"};
-        st = new DefaultTableModel(title, 0);
-        Tabla.setModel(st);
-        int num = 1;
-        for (int i = 0; i <= 1000000; i++) {
-            st.addRow(new Object[]{num, null, null, null, null, null, null, null, null, null});
-            num++;
+    }
+
+public void cargarTabla(ArrayList<Integer> numeros) {
+    // Crear la tabla con el número total de filas que corresponde al número de elementos
+    String[] title = {"No.", "Tamaño", "Bubble", "Counting", "Heap", "Insertion", "Merge", "Quick", "Selection", "Shell"};
+    st = new DefaultTableModel(title, 0);
+    Tabla.setModel(st);
+
+    int num = 1;
+    int currentSizeGroup = 1000;  // Empezamos con 1,000
+    int totalSize = numeros.size();  // Total de números en la lista
+
+    // Lista para almacenar los grupos generados
+    ArrayList<Integer> grupos = new ArrayList<>();
+
+    // Generar grupos hasta acercarnos a totalSize
+    while (currentSizeGroup < totalSize) {
+        grupos.add(currentSizeGroup);
+        
+        // Ajustar el tamaño del grupo para la siguiente iteración
+        if (currentSizeGroup < 1000000) {
+            currentSizeGroup *= 10;  // Escalamos en potencias de 10
+        } else {
+            currentSizeGroup += 1000000;  // A partir de 1 millón, incrementamos en 1 millón
         }
     }
 
-   
+    // Redondear el último grupo para que totalSize sea exacto
+    if (!grupos.isEmpty() && grupos.get(grupos.size() - 1) != totalSize) {
+        grupos.set(grupos.size() - 1, totalSize);
+    }
+
+    // Insertar los grupos en la tabla
+    for (int size : grupos) {
+        st.addRow(new Object[]{num++, size, null, null, null, null, null, null, null, null});
+    }
+}
+
+
+
+
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -144,6 +183,11 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         btnCargar.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         btnCargar.setText("Cargar archivo");
         btnCargar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnCargar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCargarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnCargar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, 200, -1));
 
         jLabel1.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 36)); // NOI18N
@@ -205,7 +249,46 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         metodoshell.start();
     }//GEN-LAST:event_btnShellActionPerformed
 
-   
+    private void btnCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarActionPerformed
+        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+        int seleccion = fileChooser.showOpenDialog(null);
+
+        if (seleccion == JFileChooser.APPROVE_OPTION) {
+            File archivo = fileChooser.getSelectedFile();
+            ArrayList<Integer> numeros = leerNumerosDesdeArchivo(archivo);
+
+            // Mostrar solo el total de números en un cuadro de diálogo
+            JOptionPane.showMessageDialog(null, "Archivo Cargado de Manera Exitosa\nTotal de números: " + numeros.size(), "Resultado", JOptionPane.INFORMATION_MESSAGE);
+
+            // Llamar al método para cargar la tabla con los tamaños
+            cargarTabla(numeros);
+        }
+    }//GEN-LAST:event_btnCargarActionPerformed
+
+    private static ArrayList<Integer> leerNumerosDesdeArchivo(File archivo) {
+        ArrayList<Integer> numeros = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                linea = linea.trim(); // Eliminar espacios en blanco
+                if (!linea.isEmpty() && linea.endsWith(",")) {
+                    linea = linea.substring(0, linea.length() - 1); // Quitar la coma final
+                }
+                try {
+                    int numero = Integer.parseInt(linea);
+                    numeros.add(numero); // Agregar número al ArrayList
+                } catch (NumberFormatException e) {
+                    System.err.println("Número inválido ignorado: " + linea);
+                }
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al leer el archivo.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return numeros;
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
