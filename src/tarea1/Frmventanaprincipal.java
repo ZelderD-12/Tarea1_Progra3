@@ -130,19 +130,19 @@ public void cargarTabla(ArrayList<Integer> numeros) {
         Tabla.setFont(new java.awt.Font("Tw Cen MT", 0, 11)); // NOI18N
         Tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"1.", "100,000", null, null, null, null, null, null, null, null},
-                {"2.", "1,000,000", null, null, null, null, null, null, null, null},
-                {"3.", "3,000,000", null, null, null, null, null, null, null, null},
-                {"4.", "5,000,000", null, null, null, null, null, null, null, null},
-                {"5.", "8,000,000", null, null, null, null, null, null, null, null},
-                {"6.", "10,000,000", null, null, null, null, null, null, null, null}
+                {"1.", "", null, null, null, null, null, null, null, null},
+                {"2.", "", null, null, null, null, null, null, null, null},
+                {"3.", "", null, null, null, null, null, null, null, null},
+                {"4.", "", null, null, null, null, null, null, null, null},
+                {"5.", "", null, null, null, null, null, null, null, null},
+                {"6.", "", null, null, null, null, null, null, null, null}
             },
             new String [] {
                 "No.", "Tamaño", "Bubble", "Counting", "Heap", "Insertion", "Merge", "Quick", "Selection", "Shell"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, true, true, true, true, true, true, true
+                false, true, true, true, true, true, true, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
