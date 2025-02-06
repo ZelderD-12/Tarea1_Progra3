@@ -42,7 +42,7 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
 
     public void cargarTabla(ArrayList<Integer> numeros) {
         // Crear la tabla con el número total de filas que corresponde al número de elementos
-        String[] title = {"No.", "Tamaño", "Bubble", "Counting", "Heap", "Insertion", "Merge", "Quick", "Selection", "Shell"};
+        String[] title = {"No.", "Tamaño", "Bubble", "Counting", "Heap", "Insertion", "Merge", "Quick", "Select  ion", "Shell"};
         st = new DefaultTableModel(title, 0);
         Tabla.setModel(st);
 
