@@ -7,12 +7,12 @@ public class SelectionSort extends Thread{
     @Override
     public void run(){
         long startTime = System.currentTimeMillis();
-     int[] arreglodeprueba = {5,0,4,7,8,33,6,99,4};
-     for(int a = 0; a<=1000000; a++){
+     int[] arreglodeprueba = {5,0,4,7,8,33,6,99,4, 56, 87};
+     
     for(int i = 0; i<= arreglodeprueba.length-1; i++){
-        System.out.println("" + arreglodeprueba[i]);
-        
-    }}
+        System.out.println("" + arreglodeprueba[i]);   
+    }
+    
      long endTime = System.currentTimeMillis();
      long milisegundos = endTime - startTime;
      long segundos = 0;
