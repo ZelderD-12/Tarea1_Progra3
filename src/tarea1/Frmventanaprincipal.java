@@ -85,88 +85,20 @@ public void cargarTabla(ArrayList<Integer> numeros) {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btnBubble = new javax.swing.JButton();
-        btnCounting = new javax.swing.JButton();
-        btnHeap = new javax.swing.JButton();
-        btnInsertion = new javax.swing.JButton();
-        btnMerge = new javax.swing.JButton();
-        btnQuick = new javax.swing.JButton();
-        btnSelection = new javax.swing.JButton();
-        btnShell = new javax.swing.JButton();
         btnCrear = new javax.swing.JButton();
         btnCargar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         Tabla = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        btnIniciar = new javax.swing.JButton();
+        btnExtraer = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnBubble.setBackground(new java.awt.Color(255, 153, 51));
-        btnBubble.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
-        btnBubble.setText("bubble sort");
-        btnBubble.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnBubble.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBubbleActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnBubble, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, 130, 40));
-
-        btnCounting.setBackground(new java.awt.Color(255, 153, 51));
-        btnCounting.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
-        btnCounting.setText("counting sort");
-        btnCounting.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel1.add(btnCounting, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 310, 130, 40));
-
-        btnHeap.setBackground(new java.awt.Color(255, 153, 51));
-        btnHeap.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
-        btnHeap.setText("heap sort");
-        btnHeap.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel1.add(btnHeap, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 310, 140, 40));
-
-        btnInsertion.setBackground(new java.awt.Color(255, 153, 51));
-        btnInsertion.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
-        btnInsertion.setText("insertion sort");
-        btnInsertion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel1.add(btnInsertion, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 310, 140, 40));
-
-        btnMerge.setBackground(new java.awt.Color(255, 153, 51));
-        btnMerge.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
-        btnMerge.setText("merge sort");
-        btnMerge.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel1.add(btnMerge, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 360, 140, 40));
-
-        btnQuick.setBackground(new java.awt.Color(255, 153, 51));
-        btnQuick.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
-        btnQuick.setText("quick sort");
-        btnQuick.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel1.add(btnQuick, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 360, 130, 40));
-
-        btnSelection.setBackground(new java.awt.Color(255, 153, 51));
-        btnSelection.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
-        btnSelection.setText("selection sort");
-        btnSelection.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnSelection.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSelectionActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnSelection, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 360, 130, 40));
-
-        btnShell.setBackground(new java.awt.Color(255, 153, 51));
-        btnShell.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
-        btnShell.setText("Shell sort");
-        btnShell.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnShell.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnShellActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnShell, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 360, 140, 40));
 
         btnCrear.setBackground(new java.awt.Color(255, 255, 102));
         btnCrear.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
@@ -198,21 +130,42 @@ public void cargarTabla(ArrayList<Integer> numeros) {
         Tabla.setFont(new java.awt.Font("Tw Cen MT", 0, 11)); // NOI18N
         Tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"", "", null, null, null, null, null, null, null, null},
-                {"", "", null, null, null, null, null, null, null, null},
-                {"", "", null, null, null, null, null, null, null, null},
-                {"", "", null, null, null, null, null, null, null, null},
-                {"", "", null, null, null, null, null, null, null, null},
-                {"", "", null, null, null, null, null, null, null, null}
+                {"1.", "100,000", null, null, null, null, null, null, null, null},
+                {"2.", "1,000,000", null, null, null, null, null, null, null, null},
+                {"3.", "3,000,000", null, null, null, null, null, null, null, null},
+                {"4.", "5,000,000", null, null, null, null, null, null, null, null},
+                {"5.", "8,000,000", null, null, null, null, null, null, null, null},
+                {"6.", "10,000,000", null, null, null, null, null, null, null, null}
             },
             new String [] {
                 "No.", "Tamaño", "Bubble", "Counting", "Heap", "Insertion", "Merge", "Quick", "Selection", "Shell"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true, true, true, true, true, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(Tabla);
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 800, 120));
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 20, -1, 70));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon("D:\\ninet\\Documents\\UNIVERSIDAD\\Quinto semestre\\logo.png")); // NOI18N
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 30, -1, -1));
+
+        btnIniciar.setBackground(new java.awt.Color(255, 102, 0));
+        btnIniciar.setFont(new java.awt.Font("Tw Cen MT", 0, 48)); // NOI18N
+        btnIniciar.setText("Iniciar");
+        jPanel1.add(btnIniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 290, -1, -1));
+
+        btnExtraer.setBackground(new java.awt.Color(255, 204, 51));
+        btnExtraer.setFont(new java.awt.Font("Tw Cen MT", 0, 14)); // NOI18N
+        btnExtraer.setText("Extraer datos");
+        jPanel1.add(btnExtraer, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 390, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -225,7 +178,10 @@ public void cargarTabla(ArrayList<Integer> numeros) {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -234,20 +190,6 @@ public void cargarTabla(ArrayList<Integer> numeros) {
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         hilodegeneradordenumeros.start();
     }//GEN-LAST:event_btnCrearActionPerformed
-
-    private void btnBubbleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBubbleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnBubbleActionPerformed
-
-    private void btnSelectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelectionActionPerformed
-        SelectionSort metodoseleccion = new SelectionSort();
-        metodoseleccion.start();
-    }//GEN-LAST:event_btnSelectionActionPerformed
-
-    private void btnShellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShellActionPerformed
-        ShellSort metodoshell = new ShellSort();
-        metodoshell.start();
-    }//GEN-LAST:event_btnShellActionPerformed
 
     private void btnCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarActionPerformed
         // TODO add your handling code here:
@@ -323,18 +265,13 @@ public void cargarTabla(ArrayList<Integer> numeros) {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Tabla;
-    private javax.swing.JButton btnBubble;
     private javax.swing.JButton btnCargar;
-    private javax.swing.JButton btnCounting;
     private javax.swing.JButton btnCrear;
-    private javax.swing.JButton btnHeap;
-    private javax.swing.JButton btnInsertion;
-    private javax.swing.JButton btnMerge;
-    private javax.swing.JButton btnQuick;
-    private javax.swing.JButton btnSelection;
-    private javax.swing.JButton btnShell;
+    private javax.swing.JButton btnExtraer;
+    private javax.swing.JButton btnIniciar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
