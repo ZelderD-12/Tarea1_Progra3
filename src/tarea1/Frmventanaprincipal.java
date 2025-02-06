@@ -154,7 +154,7 @@ public void cargarTabla(ArrayList<Integer> numeros) {
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 800, 120));
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 20, -1, 70));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon("D:\\ninet\\Documents\\UNIVERSIDAD\\Quinto semestre\\logo.png")); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logo.png"))); // NOI18N
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 30, -1, -1));
 
         btnIniciar.setBackground(new java.awt.Color(255, 102, 0));
