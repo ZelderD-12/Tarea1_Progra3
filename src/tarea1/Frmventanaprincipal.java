@@ -294,8 +294,8 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     }*/
     hiloOrdenamientoHeap.start();
     hiloOrdenamientoInsert.start();
-    //hiloOrdenamientoBubble.start ();
-    //hiloOrdenamientoCounting.start ();
+    hiloOrdenamientoBubble.start ();
+    hiloOrdenamientoCounting.start ();
     }//GEN-LAST:event_btnIniciarActionPerformed
 
     private void btnExtraerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExtraerActionPerformed
