@@ -7,12 +7,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class Frmventanaprincipal extends javax.swing.JFrame {
 
+    //Arrglo orifginal de lo que eliga el usuario
+    int[] arrayOriginal = new int[10_000_000];
+    
     //Listas de las Canciones
     List<String> listaCanciones = Arrays.asList(
             "music/claro.wav",
@@ -23,20 +27,32 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     //Parametros para crear el txt        
     String rutaCarpetanumeros = "numeros/";
     String nombredelArchivo = "numeros.txt";
-    int cantidadenumero = 100000;
+    int cantidadenumero = 10_000_000;
 
     //Invocacion de metodos
     Clasecrear manejador = new Clasecrear(rutaCarpetanumeros, nombredelArchivo, cantidadenumero);
     ReproducirCancion reproductor = new ReproducirCancion(listaCanciones);
+    
+    //Invocacion de ordenamientos
+    Heap demo = new Heap(arrayOriginal);
+    Insert demo1 = new Insert(arrayOriginal);
+   
 
     //Creacion de hilos
     Thread hiloReproduccion = new Thread(reproductor);
     Thread hilodegeneradordenumeros = new Thread(manejador);
+    Thread hiloOrdenamientoHeap = new Thread(demo);
+    Thread hiloOrdenamientoInsert = new Thread(demo1);
 
     DefaultTableModel st = new DefaultTableModel();
 
     public Frmventanaprincipal() {
-        hiloReproduccion.start();
+         Random random = new Random();
+        for (int i = 0; i < arrayOriginal.length; i++) {
+            arrayOriginal[i] = random.nextInt();
+        }
+        //hilo de la musica pero se dañaz al subir al git hub para que no salagan error
+        //hiloReproduccion.start();
         initComponents();
     }
 
@@ -148,6 +164,11 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         btnIniciar.setBackground(new java.awt.Color(255, 102, 0));
         btnIniciar.setFont(new java.awt.Font("Tw Cen MT", 0, 48)); // NOI18N
         btnIniciar.setText("Iniciar");
+        btnIniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIniciarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnIniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 290, -1, -1));
 
         btnExtraer.setBackground(new java.awt.Color(255, 204, 51));
@@ -195,6 +216,12 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
             cargarTabla(numeros);
         }
     }//GEN-LAST:event_btnCargarActionPerformed
+
+    private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
+        // iniciar todo los ordenamientos
+        hiloOrdenamientoHeap.start();
+        hiloOrdenamientoInsert.start();
+    }//GEN-LAST:event_btnIniciarActionPerformed
 
     private static ArrayList<Integer> leerNumerosDesdeArchivo(File archivo) {
         ArrayList<Integer> numeros = new ArrayList<>();
