@@ -1,6 +1,6 @@
 package tarea1;
 
-class Cronometro {
+public class Cronometro {
     private long inicio;
     private long tiempoTranscurrido;
     private boolean enEjecucion;
