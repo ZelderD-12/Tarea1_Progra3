@@ -1,14 +1,15 @@
-
 package tarea1;
 
 class Cronometro {
     private long inicio;
     private long tiempoTranscurrido;
     private boolean enEjecucion;
+    private long tiempoAlmacenado;
 
     public Cronometro() {
         this.tiempoTranscurrido = 0;
         this.enEjecucion = false;
+        this.tiempoAlmacenado = 0;
     }
 
     public void iniciar() {
@@ -32,10 +33,9 @@ class Cronometro {
     }
 
     public void resetear() {
+        almacenarTiempo();  // Almacenar el tiempo transcurrido antes de resetear
         tiempoTranscurrido = 0;
-        if (enEjecucion) {
-            inicio = System.currentTimeMillis();
-        }
+        enEjecucion = false; // Asegurarse de que el cronómetro no esté en ejecución
         System.out.println("Cronómetro reseteado.");
     }
 
@@ -57,5 +57,14 @@ class Cronometro {
         long milisegundos = tiempoTotal % 1000;
 
         System.out.println(String.format("Tiempo transcurrido: %02d:%02d:%02d:%03d (hh:mm:ss:ms)", horas, minutos, segundos, milisegundos));
+    }
+
+    public void almacenarTiempo() {
+        tiempoAlmacenado = obtenerTiempoTranscurrido();
+        System.out.println("Tiempo almacenado: " + tiempoAlmacenado + " ms");
+    }
+
+    public long obtenerTiempoAlmacenado() {
+        return tiempoAlmacenado;
     }
 }
