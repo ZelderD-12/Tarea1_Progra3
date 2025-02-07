@@ -41,6 +41,7 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     //Invocacion de ordenamientos
     Heap demo = new Heap(arrayOriginal);
     Insert demo1 = new Insert(arrayOriginal);
+    SelectionSort demo2 = new SelectionSort(arrayOriginal);
    
 
     //Creacion de hilos
@@ -48,6 +49,7 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     Thread hilodegeneradordenumeros = new Thread(manejador);
     Thread hiloOrdenamientoHeap = new Thread(demo);
     Thread hiloOrdenamientoInsert = new Thread(demo1);
+    Thread hiloOrdernamientoSelect = new Thread(demo2);
 
     DefaultTableModel st = new DefaultTableModel();
     
