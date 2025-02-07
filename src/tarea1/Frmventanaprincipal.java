@@ -20,7 +20,7 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     private File archivoSeleccionado; // Variable de clase para almacenar el archivo seleccionado
 
     //Arrglo orifginal de lo que eliga el usuario
-    int[] arrayOriginal = new int[10_000_000];
+   public int[] arrayOriginal = new int[10_000_000];
     
     //Listas de las Canciones
     List<String> listaCanciones = Arrays.asList(
@@ -33,42 +33,53 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     String rutaCarpetanumeros = "numeros/";
     String nombredelArchivo = "numeros.txt";
     int cantidadenumero = 10_000_000;
-
+    //lectura del archivo
+    String rutaArchivocreado = "numeros/numeros.txt";
+    
     //Invocacion de metodos
     Clasecrear manejador = new Clasecrear(rutaCarpetanumeros, nombredelArchivo, cantidadenumero);
     ReproducirCancion reproductor = new ReproducirCancion(listaCanciones);
+    DAtosTabala datos;
     
     //Invocacion de ordenamientos
-    Heap demo = new Heap(arrayOriginal);
-    Insert demo1 = new Insert(arrayOriginal);
+    Heap demo;
+    Insert demo1;
     SelectionSort demo2 = new SelectionSort(arrayOriginal);
     ShellSort demo3 = new ShellSort(arrayOriginal);
-    Bubble demo4 = new Bubble  (arrayOriginal);
-    Counting demo5 = new Counting  (arrayOriginal);
+    Bubble demo4 = new Bubble(arrayOriginal);
+    Counting demo5 = new Counting(arrayOriginal);
 
     //Creacion de hilos
     Thread hiloReproduccion = new Thread(reproductor);
     Thread hilodegeneradordenumeros = new Thread(manejador);
-    Thread hiloOrdenamientoHeap = new Thread(demo);
-    Thread hiloOrdenamientoInsert = new Thread(demo1);
+    
+    //hilo de ordenamientos
+    Thread hiloOrdenamientoHeap ;
+    Thread hiloOrdenamientoInsert ;
     Thread hiloOrdernamientoSelect = new Thread(demo2);
     Thread hiloOrdenamientoShell = new Thread(demo3);
     Thread hiloOrdenamientoBubble = new Thread(demo4);
     Thread hiloOrdenamientoCounting = new Thread(demo5);
 
-    DefaultTableModel st = new DefaultTableModel();
-    
     
 
     public Frmventanaprincipal() {
-         Random random = new Random();
-        for (int i = 0; i < arrayOriginal.length; i++) {
-            arrayOriginal[i] = random.nextInt();
-        }
+        
+        
+        
         //hilo de la musica pero se dañaz al subir al git hub para que no salagan error
         //hiloReproduccion.start();
         initComponents();
+        datos = new DAtosTabala(Tabla);
+        
+        //iniciar los objetos 
+        demo = new Heap(arrayOriginal, (DefaultTableModel) Tabla.getModel());
+        demo1 =  new Insert(arrayOriginal, (DefaultTableModel) Tabla.getModel());
+        
+        hiloOrdenamientoHeap = new Thread(demo);
+        hiloOrdenamientoInsert =  new Thread(demo1);
     }
+    
 
     public void cargarTabla(ArrayList<Integer> numeros) {
     // Títulos de la tabla
@@ -156,12 +167,12 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         Tabla.setFont(new java.awt.Font("Tw Cen MT", 0, 11)); // NOI18N
         Tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"", "", null, null, null, null, null, null, null, null},
-                {"", "", null, null, null, null, null, null, null, null},
-                {"", "", null, null, null, null, null, null, null, null},
-                {"", "", null, null, null, null, null, null, null, null},
-                {"", "", null, null, null, null, null, null, null, null},
-                {"", "", null, null, null, null, null, null, null, null}
+                {"1", "1000000", null, null, null, null, null, null, null, null},
+                {"2", "10000000", null, null, null, null, null, null, null, null},
+                {"3", "30000000", null, null, null, null, null, null, null, null},
+                {"4", "50000000", null, null, null, null, null, null, null, null},
+                {"5", "800000", null, null, null, null, null, null, null, null},
+                {"6", "10000000", null, null, null, null, null, null, null, null}
             },
             new String [] {
                 "No.", "Tamaño", "Bubble", "Counting", "Heap", "Insertion", "Merge", "Quick", "Selection", "Shell"
@@ -169,7 +180,7 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(Tabla);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 800, 120));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 800, 130));
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 20, -1, 70));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logo.png"))); // NOI18N
@@ -252,7 +263,7 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
         // TODO add your handling code here:
-         DefaultTableModel model = (DefaultTableModel) Tabla.getModel();
+      /* DefaultTableModel model = (DefaultTableModel) Tabla.getModel();
 
     for (int i = 0; i < model.getRowCount(); i++) {
         int tam = (int) model.getValueAt(i, 1); // Obtener el tamaño de la fila
@@ -280,11 +291,11 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
                 model.setValueAt(tiempoQuick, fila, 7);
             });
         }).start();
-    }
+    }*/
     hiloOrdenamientoHeap.start();
     hiloOrdenamientoInsert.start();
-    hiloOrdenamientoBubble.start ();
-     hiloOrdenamientoCounting.start ();
+    //hiloOrdenamientoBubble.start ();
+    //hiloOrdenamientoCounting.start ();
     }//GEN-LAST:event_btnIniciarActionPerformed
 
     private void btnExtraerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExtraerActionPerformed
