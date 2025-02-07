@@ -142,7 +142,7 @@
                       <Data value="10000000"/>
                       <Data value="30000000"/>
                       <Data value="50000000"/>
-                      <Data value="800000"/>
+                      <Data value="80000000"/>
                       <Data value="10000000"/>
                     </Column>
                     <Column editable="true" title="Bubble" type="java.lang.Object"/>
