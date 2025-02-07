@@ -171,7 +171,7 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
                 {"2", "10000000", null, null, null, null, null, null, null, null},
                 {"3", "30000000", null, null, null, null, null, null, null, null},
                 {"4", "50000000", null, null, null, null, null, null, null, null},
-                {"5", "800000", null, null, null, null, null, null, null, null},
+                {"5", "80000000", null, null, null, null, null, null, null, null},
                 {"6", "10000000", null, null, null, null, null, null, null, null}
             },
             new String [] {
