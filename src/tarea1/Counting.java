@@ -1,25 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tarea1;
 
-/**
- *
- * @author ninet
- */
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Random;
 
 public class Counting implements Runnable {
     private int[] arrayOriginal;
     private Cronometro cronometro;
     private int[] incrementos = {100_000, 1_000_000, 3_000_000, 5_000_000, 8_000_000, 10_000_000};
-    private static final int MAX_RANGE = 1_000_000; // Tamaño máximo del subrango
+    private static final int MAX_RANGE = 1_000_000;
 
     public Counting(int[] arrayOriginal) {
         if (arrayOriginal.length != 10_000_000) {
@@ -40,14 +31,14 @@ public class Counting implements Runnable {
             System.out.println("Preparando para ordenar " + tamaño + " elementos...");
 
             cronometro.iniciar();
-            countingSortWithRanges(arrayCopia); // Usamos el método countingSortWithRanges
+            countingSortOptimizado(arrayCopia);
             cronometro.detener();
 
             System.out.println("Array ordenado (primeros 10 elementos): " + Arrays.toString(Arrays.copyOf(arrayCopia, 10)));
             mostrarTiempoTranscurrido();
             guardarArrayEnArchivo("numeros/ordenamiento_Counting_" + tamaño + ".txt", arrayCopia);
 
-            reset(); // Resetear cronometro y liberar memoria
+            reset();
         }
         System.out.println("Todos los incrementos han sido procesados.");
     }
@@ -58,13 +49,7 @@ public class Counting implements Runnable {
 
     public void reset() {
         cronometro.resetear();
-        liberarMemoria();
         System.out.println("Estado de la clase reseteado.");
-    }
-
-    private void liberarMemoria() {
-        System.gc();
-        System.out.println("Memoria liberada.");
     }
 
     public void guardarArrayEnArchivo(String rutaArchivo, int[] array) {
@@ -73,9 +58,10 @@ public class Counting implements Runnable {
             carpeta.mkdir();
         }
 
-        try (FileWriter writer = new FileWriter(rutaArchivo)) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(rutaArchivo))) {
             for (int num : array) {
-                writer.write(num + "\n");
+                writer.write(Integer.toString(num));
+                writer.newLine();
             }
             System.out.println("Array ordenado guardado en " + rutaArchivo);
         } catch (IOException e) {
@@ -83,58 +69,57 @@ public class Counting implements Runnable {
         }
     }
 
-    // Método Counting Sort optimizado para números negativos y grandes cantidades de datos
-    private void countingSortWithRanges(int[] array) {
-        int max = Arrays.stream(array).max().orElse(Integer.MIN_VALUE);
-        int min = Arrays.stream(array).min().orElse(Integer.MAX_VALUE);
-
-        // Ajustar valores para que sean positivos
-        int offset = -min;
-        int[] adjustedArray = Arrays.stream(array).map(num -> num + offset).toArray();
-
-        // Ordenar por subrangos
-        int numSubRanges = (int) Math.ceil((double) (max - min + 1) / MAX_RANGE);
-        for (int i = 0; i < numSubRanges; i++) {
-            int subRangeMin = i * MAX_RANGE;
-            int subRangeMax = Math.min(subRangeMin + MAX_RANGE - 1, max - min);
-            countingSortSubRange(adjustedArray, subRangeMin, subRangeMax);
+    // Método Counting Sort optimizado
+    private void countingSortOptimizado(int[] array) {
+        int min = array[0], max = array[0];
+        for (int num : array) {
+            if (num < min) min = num;
+            if (num > max) max = num;
         }
 
-        // Revertir el ajuste
-        System.arraycopy(Arrays.stream(adjustedArray).map(num -> num - offset).toArray(), 0, array, 0, array.length);
+        int offset = -min;
+        int range = max - min + 1;
+        int numSubRanges = (int) Math.ceil((double) range / MAX_RANGE);
+
+        int[] output = new int[array.length];
+        for (int i = 0; i < numSubRanges; i++) {
+            int subRangeMin = i * MAX_RANGE;
+            int subRangeMax = Math.min(subRangeMin + MAX_RANGE - 1, range - 1);
+            procesarSubRango(array, output, subRangeMin, subRangeMax, offset);
+        }
     }
 
-    private void countingSortSubRange(int[] array, int subRangeMin, int subRangeMax) {
+    private void procesarSubRango(int[] array, int[] output, int subRangeMin, int subRangeMax, int offset) {
         int subRangeSize = subRangeMax - subRangeMin + 1;
-        if (subRangeSize <= 0) return;
+        int[] count = new int[subRangeSize + 1];
 
-        int[] count = new int[subRangeSize];
-        int[] output = new int[array.length];
-
-        // Contar la frecuencia de cada elemento en el subrango
+        // Contar frecuencias
         for (int num : array) {
-            if (num >= subRangeMin && num <= subRangeMax) {
-                count[num - subRangeMin]++;
+            int adjusted = num + offset;
+            if (adjusted >= subRangeMin && adjusted <= subRangeMax) {
+                count[adjusted - subRangeMin + 1]++;
             }
         }
 
-        // Acumular las frecuencias
+        // Acumular frecuencias
         for (int i = 1; i < count.length; i++) {
             count[i] += count[i - 1];
         }
 
-        // Construir el array de salida
+        // Ordenar elementos del subrango
         for (int i = array.length - 1; i >= 0; i--) {
-            if (array[i] >= subRangeMin && array[i] <= subRangeMax) {
-                output[count[array[i] - subRangeMin] - 1] = array[i];
-                count[array[i] - subRangeMin]--;
+            int adjusted = array[i] + offset;
+            if (adjusted >= subRangeMin && adjusted <= subRangeMax) {
+                output[count[adjusted - subRangeMin]++] = array[i];
             }
         }
 
-        // Copiar los elementos ordenados al array original
-        for (int i = 0, j = 0; i < array.length; i++) {
-            if (output[i] != 0) {
-                array[j++] = output[i];
+        // Copiar elementos ordenados al array original
+        int start = count[0];
+        for (int i = 0; i < count.length - 1; i++) {
+            int end = count[i];
+            while (start < end) {
+                array[start++] = output[i];
             }
         }
     }
