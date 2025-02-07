@@ -42,7 +42,7 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     Heap demo = new Heap(arrayOriginal);
     Insert demo1 = new Insert(arrayOriginal);
     SelectionSort demo2 = new SelectionSort(arrayOriginal);
-   
+    ShellSort demo3 = new ShellSort(arrayOriginal);
 
     //Creacion de hilos
     Thread hiloReproduccion = new Thread(reproductor);
@@ -50,6 +50,7 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     Thread hiloOrdenamientoHeap = new Thread(demo);
     Thread hiloOrdenamientoInsert = new Thread(demo1);
     Thread hiloOrdernamientoSelect = new Thread(demo2);
+    Thread hiloOrdenamientoShell = new Thread(demo3);
 
     DefaultTableModel st = new DefaultTableModel();
     
