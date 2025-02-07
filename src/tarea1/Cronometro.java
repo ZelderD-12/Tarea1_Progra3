@@ -48,7 +48,14 @@ class Cronometro {
     }
 
     public void mostrarTiempoTranscurrido() {
-        System.out.println("Tiempo transcurrido: " + obtenerTiempoTranscurrido() + " ms");
-        
+        long tiempoTotal = obtenerTiempoTranscurrido();
+        long horas = tiempoTotal / 3600000;
+        tiempoTotal %= 3600000;
+        long minutos = tiempoTotal / 60000;
+        tiempoTotal %= 60000;
+        long segundos = tiempoTotal / 1000;
+        long milisegundos = tiempoTotal % 1000;
+
+        System.out.println(String.format("Tiempo transcurrido: %02d:%02d:%02d:%03d (hh:mm:ss:ms)", horas, minutos, segundos, milisegundos));
     }
 }
