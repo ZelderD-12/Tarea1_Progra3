@@ -1,6 +1,7 @@
 package tarea1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import java.util.Arrays;
 import java.util.List;
 =======
@@ -17,7 +18,22 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.SwingUtilities;
 >>>>>>> COMBINADA
+=======
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.SwingUtilities;
+>>>>>>> COMBINADA
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 public class Frmventanaprincipal extends javax.swing.JFrame {
     //Listas de las Canciones
@@ -92,8 +108,67 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     
 
 >>>>>>> COMBINADA
+=======
+
+public class Frmventanaprincipal extends javax.swing.JFrame {
+    
+    private ArrayList<Integer> numeros = new ArrayList<>();
+    private File archivoSeleccionado; // Variable de clase para almacenar el archivo seleccionado
+
+    //Arrglo orifginal de lo que eliga el usuario
+   public int[] arrayOriginal = new int[10_000_000];
+    
+    //Listas de las Canciones
+    List<String> listaCanciones = Arrays.asList(
+            "music/claro.wav",
+            "music/wiisport60.wav",
+            "music/elevadorcus.wav"
+    );
+
+    //Parametros para crear el txt        
+    String rutaCarpetanumeros = "numeros/";
+    String nombredelArchivo = "numeros.txt";
+    int cantidadenumero = 10_000_000;
+    //lectura del archivo
+    String rutaArchivocreado = "numeros/numeros.txt";
+    
+    //Invocacion de metodos
+    Clasecrear manejador = new Clasecrear(rutaCarpetanumeros, nombredelArchivo, cantidadenumero);
+    ReproducirCancion reproductor = new ReproducirCancion(listaCanciones);
+    DAtosTabala datos;
+    
+    //Invocacion de ordenamientos
+    Heap demo;
+    Insert demo1;
+    SelectionSort demo2 = new SelectionSort(arrayOriginal);
+    ShellSort demo3 = new ShellSort(arrayOriginal);
+    Bubble demo4 = new Bubble(arrayOriginal);
+    Counting demo5 = new Counting(arrayOriginal);
+
+    //Creacion de hilos
+    Thread hiloReproduccion = new Thread(reproductor);
+    Thread hilodegeneradordenumeros = new Thread(manejador);
+    
+    //hilo de ordenamientos
+    Thread hiloOrdenamientoHeap ;
+    Thread hiloOrdenamientoInsert ;
+    Thread hiloOrdernamientoSelect = new Thread(demo2);
+    Thread hiloOrdenamientoShell = new Thread(demo3);
+    Thread hiloOrdenamientoBubble = new Thread(demo4);
+    Thread hiloOrdenamientoCounting = new Thread(demo5);
+
+    
+
+>>>>>>> COMBINADA
     public Frmventanaprincipal() {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+        
+        
+        
+        //hilo de la musica pero se dañaz al subir al git hub para que no salagan error
+>>>>>>> COMBINADA
 =======
         
         
@@ -154,6 +229,7 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
 <<<<<<< HEAD
+<<<<<<< HEAD
         btnBubble = new javax.swing.JButton();
         btnCounting = new javax.swing.JButton();
         btnHeap = new javax.swing.JButton();
@@ -164,6 +240,8 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         btnShell = new javax.swing.JButton();
 =======
 >>>>>>> COMBINADA
+=======
+>>>>>>> COMBINADA
         btnCrear = new javax.swing.JButton();
         btnCargar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -171,6 +249,13 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         Tabla = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+        jLabel3 = new javax.swing.JLabel();
+        btnIniciar = new javax.swing.JButton();
+        btnExtraer = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+>>>>>>> COMBINADA
 =======
         jLabel3 = new javax.swing.JLabel();
         btnIniciar = new javax.swing.JButton();
@@ -184,6 +269,7 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         btnBubble.setBackground(new java.awt.Color(255, 153, 51));
         btnBubble.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         btnBubble.setText("bubble sort");
@@ -196,20 +282,36 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         btnCrear.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCrear.addActionListener(new java.awt.event.ActionListener() {
 >>>>>>> COMBINADA
+=======
+        btnCrear.setBackground(new java.awt.Color(255, 255, 102));
+        btnCrear.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
+        btnCrear.setText("Crear");
+        btnCrear.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnCrear.addActionListener(new java.awt.event.ActionListener() {
+>>>>>>> COMBINADA
             public void actionPerformed(java.awt.event.ActionEvent evt) {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 btnBubbleActionPerformed(evt);
+=======
+                btnCrearActionPerformed(evt);
+>>>>>>> COMBINADA
 =======
                 btnCrearActionPerformed(evt);
 >>>>>>> COMBINADA
             }
         });
 <<<<<<< HEAD
+<<<<<<< HEAD
         jPanel1.add(btnBubble, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, 130, 40));
 =======
         jPanel1.add(btnCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 200, -1));
 >>>>>>> COMBINADA
+=======
+        jPanel1.add(btnCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 200, -1));
+>>>>>>> COMBINADA
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         btnCounting.setBackground(new java.awt.Color(255, 153, 51));
         btnCounting.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
@@ -228,7 +330,20 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         });
         jPanel1.add(btnCargar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, 200, -1));
 >>>>>>> COMBINADA
+=======
+        btnCargar.setBackground(new java.awt.Color(255, 255, 102));
+        btnCargar.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
+        btnCargar.setText("Cargar archivo");
+        btnCargar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnCargar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCargarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnCargar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, 200, -1));
+>>>>>>> COMBINADA
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         btnHeap.setBackground(new java.awt.Color(255, 153, 51));
         btnHeap.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
@@ -295,6 +410,8 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
 
 =======
 >>>>>>> COMBINADA
+=======
+>>>>>>> COMBINADA
         jLabel1.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Universidad Mariano Galvéz");
@@ -304,12 +421,21 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         Tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 {"1.", "100,000", null, null, null, null, null, null, null, null},
                 {"2.", "1,000,000", null, null, null, null, null, null, null, null},
                 {"3.", "3,000,000", null, null, null, null, null, null, null, null},
                 {"4.", "5,000,000", null, null, null, null, null, null, null, null},
                 {"5.", "8,000,000", null, null, null, null, null, null, null, null},
                 {"6.", "10,000,000", null, null, null, null, null, null, null, null}
+=======
+                {"1", "1000000", null, null, null, null, null, null, null, null},
+                {"2", "10000000", null, null, null, null, null, null, null, null},
+                {"3", "30000000", null, null, null, null, null, null, null, null},
+                {"4", "50000000", null, null, null, null, null, null, null, null},
+                {"5", "80000000", null, null, null, null, null, null, null, null},
+                {"6", "10000000", null, null, null, null, null, null, null, null}
+>>>>>>> COMBINADA
 =======
                 {"1", "1000000", null, null, null, null, null, null, null, null},
                 {"2", "10000000", null, null, null, null, null, null, null, null},
@@ -326,8 +452,44 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         jScrollPane2.setViewportView(Tabla);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 800, 120));
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 20, -1, 70));
+=======
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 800, 130));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 20, -1, 70));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logo.png"))); // NOI18N
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 30, -1, -1));
+
+        btnIniciar.setBackground(new java.awt.Color(255, 102, 0));
+        btnIniciar.setFont(new java.awt.Font("Tw Cen MT", 0, 48)); // NOI18N
+        btnIniciar.setText("Iniciar");
+        btnIniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIniciarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnIniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 290, -1, -1));
+
+        btnExtraer.setBackground(new java.awt.Color(255, 204, 51));
+        btnExtraer.setFont(new java.awt.Font("Tw Cen MT", 0, 14)); // NOI18N
+        btnExtraer.setText("Extraer datos");
+        btnExtraer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExtraerActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnExtraer, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 390, -1, -1));
+
+        jButton1.setText("Boton Prueba de Diego");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 330, -1, -1));
+>>>>>>> COMBINADA
 =======
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 800, 130));
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 20, -1, 70));
@@ -376,7 +538,14 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 <<<<<<< HEAD
+<<<<<<< HEAD
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
+=======
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+>>>>>>> COMBINADA
 =======
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
@@ -392,7 +561,11 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         hilodegeneradordenumeros.start();
     }//GEN-LAST:event_btnCrearActionPerformed
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> COMBINADA
 
+<<<<<<< HEAD
     private void btnBubbleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBubbleActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBubbleActionPerformed
@@ -409,6 +582,8 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
 =======
 >>>>>>> COMBINADA
 
+=======
+>>>>>>> COMBINADA
     private void btnCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarActionPerformed
         // Abrir el JFileChooser para seleccionar el archivo
     JFileChooser fileChooser = new JFileChooser();
@@ -532,6 +707,7 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Tabla;
 <<<<<<< HEAD
+<<<<<<< HEAD
     private javax.swing.JButton btnBubble;
     private javax.swing.JButton btnCargar;
     private javax.swing.JButton btnCounting;
@@ -543,15 +719,24 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnSelection;
     private javax.swing.JButton btnShell;
 =======
+=======
+>>>>>>> COMBINADA
     private javax.swing.JButton btnCargar;
     private javax.swing.JButton btnCrear;
     private javax.swing.JButton btnExtraer;
     private javax.swing.JButton btnIniciar;
     private javax.swing.JButton jButton1;
+<<<<<<< HEAD
+>>>>>>> COMBINADA
+=======
 >>>>>>> COMBINADA
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    private javax.swing.JLabel jLabel3;
+>>>>>>> COMBINADA
 =======
     private javax.swing.JLabel jLabel3;
 >>>>>>> COMBINADA
