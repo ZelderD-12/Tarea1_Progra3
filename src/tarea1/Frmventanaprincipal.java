@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -18,6 +19,9 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     private ArrayList<Integer> numeros = new ArrayList<>();
     private File archivoSeleccionado; // Variable de clase para almacenar el archivo seleccionado
 
+    //Arrglo orifginal de lo que eliga el usuario
+    int[] arrayOriginal = new int[10_000_000];
+    
     //Listas de las Canciones
     List<String> listaCanciones = Arrays.asList(
             "music/claro.wav",
@@ -28,21 +32,33 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     //Parametros para crear el txt        
     String rutaCarpetanumeros = "numeros/";
     String nombredelArchivo = "numeros.txt";
-    int cantidadenumero = 100000;
+    int cantidadenumero = 10_000_000;
 
     //Invocacion de metodos
     Clasecrear manejador = new Clasecrear(rutaCarpetanumeros, nombredelArchivo, cantidadenumero);
     ReproducirCancion reproductor = new ReproducirCancion(listaCanciones);
+    
+    //Invocacion de ordenamientos
+    Heap demo = new Heap(arrayOriginal);
+    Insert demo1 = new Insert(arrayOriginal);
+   
 
     //Creacion de hilos
     Thread hiloReproduccion = new Thread(reproductor);
     Thread hilodegeneradordenumeros = new Thread(manejador);
+    Thread hiloOrdenamientoHeap = new Thread(demo);
+    Thread hiloOrdenamientoInsert = new Thread(demo1);
 
     DefaultTableModel st = new DefaultTableModel();
     
     
 
     public Frmventanaprincipal() {
+         Random random = new Random();
+        for (int i = 0; i < arrayOriginal.length; i++) {
+            arrayOriginal[i] = random.nextInt();
+        }
+        //hilo de la musica pero se dañaz al subir al git hub para que no salagan error
         //hiloReproduccion.start();
         initComponents();
     }
