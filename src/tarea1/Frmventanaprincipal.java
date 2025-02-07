@@ -10,8 +10,13 @@ import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.SwingUtilities;
+
 
 public class Frmventanaprincipal extends javax.swing.JFrame {
+    
+    private ArrayList<Integer> numeros = new ArrayList<>();
+    private File archivoSeleccionado; // Variable de clase para almacenar el archivo seleccionado
 
     //Listas de las Canciones
     List<String> listaCanciones = Arrays.asList(
@@ -34,6 +39,8 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     Thread hilodegeneradordenumeros = new Thread(manejador);
 
     DefaultTableModel st = new DefaultTableModel();
+    
+    
 
     public Frmventanaprincipal() {
         //hiloReproduccion.start();
@@ -41,41 +48,40 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     }
 
     public void cargarTabla(ArrayList<Integer> numeros) {
-        // Crear la tabla con el número total de filas que corresponde al número de elementos
-        String[] title = {"No.", "Tamaño", "Bubble", "Counting", "Heap", "Insertion", "Merge", "Quick", "Select  ion", "Shell"};
-        st = new DefaultTableModel(title, 0);
-        Tabla.setModel(st);
+    // Títulos de la tabla
+    String[] title = {"No.", "Tamaño", "Bubble", "Counting", "Heap", "Insertion", "Merge", "Quick", "Selection", "Shell"};
+    DefaultTableModel st = new DefaultTableModel(title, 0);
+    Tabla.setModel(st);
 
-        int num = 1;
-        int currentSizeGroup = 1000;  // Empezamos con 1,000
-        int totalSize = numeros.size();  // Total de números en la lista
+    int num = 1;
+    int currentSizeGroup = 1000;
+    int totalSize = numeros.size();
 
-        // Lista para almacenar los grupos generados
-        ArrayList<Integer> grupos = new ArrayList<>();
+    ArrayList<Integer> grupos = new ArrayList<>();
 
-        // Generar grupos hasta acercarnos a totalSize
-        while (currentSizeGroup < totalSize) {
-            grupos.add(currentSizeGroup);
-
-            // Ajustar el tamaño del grupo para la siguiente iteración
-            if (currentSizeGroup < 1000000) {
-                currentSizeGroup *= 10;  // Escalamos en potencias de 10
-            } else {
-                currentSizeGroup += 1000000;  // A partir de 1 millón, incrementamos en 1 millón
-            }
-        }
-
-        // Redondear el último grupo para que totalSize sea exacto
-        if (!grupos.isEmpty() && grupos.get(grupos.size() - 1) != totalSize) {
-            grupos.set(grupos.size() - 1, totalSize);
-        }
-
-        // Insertar los grupos en la tabla
-        for (int size : grupos) {
-            st.addRow(new Object[]{num++, size, null, null, null, null, null, null, null, null});
+    while (currentSizeGroup < totalSize) {
+        grupos.add(currentSizeGroup);
+        if (currentSizeGroup < 1000000) {
+            currentSizeGroup *= 10;
+        } else {
+            currentSizeGroup += 1000000;
         }
     }
 
+    // Asegurar que el último grupo sea exactamente el total de números
+    if (!grupos.isEmpty() && grupos.get(grupos.size() - 1) != totalSize) {
+        grupos.set(grupos.size() - 1, totalSize);
+    }
+
+    // Llenar la tabla solo con los tamaños
+    for (int tam : grupos) {
+        if (tam > totalSize) break;
+        Object[] fila = {num++, tam, "-", "-", "-", "-", "-", "-", "-", "-"}; // Solo tamaño, tiempos vacíos
+        st.addRow(fila);
+    }
+}
+
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -148,11 +154,21 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         btnIniciar.setBackground(new java.awt.Color(255, 102, 0));
         btnIniciar.setFont(new java.awt.Font("Tw Cen MT", 0, 48)); // NOI18N
         btnIniciar.setText("Iniciar");
+        btnIniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIniciarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnIniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 290, -1, -1));
 
         btnExtraer.setBackground(new java.awt.Color(255, 204, 51));
         btnExtraer.setFont(new java.awt.Font("Tw Cen MT", 0, 14)); // NOI18N
         btnExtraer.setText("Extraer datos");
+        btnExtraer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExtraerActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnExtraer, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 390, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -180,44 +196,84 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void btnCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarActionPerformed
-        // TODO add your handling code here:
-        JFileChooser fileChooser = new JFileChooser();
-        int seleccion = fileChooser.showOpenDialog(null);
+        // Abrir el JFileChooser para seleccionar el archivo
+    JFileChooser fileChooser = new JFileChooser();
+    int seleccion = fileChooser.showOpenDialog(null);
 
-        if (seleccion == JFileChooser.APPROVE_OPTION) {
-            File archivo = fileChooser.getSelectedFile();
-            ArrayList<Integer> numeros = leerNumerosDesdeArchivo(archivo);
+    if (seleccion == JFileChooser.APPROVE_OPTION) {
+        archivoSeleccionado = fileChooser.getSelectedFile(); // Guardar el archivo seleccionado
 
-            // Mostrar solo el total de números en un cuadro de diálogo
-            JOptionPane.showMessageDialog(null, "Archivo Cargado de Manera Exitosa\nTotal de números: " + numeros.size(), "Resultado", JOptionPane.INFORMATION_MESSAGE);
+        // Leer los números desde el archivo
+        ArrayList<Integer> numeros = leerNumerosDesdeArchivo(archivoSeleccionado);
 
-            // Llamar al método para cargar la tabla con los tamaños
-            cargarTabla(numeros);
-        }
+        // Mostrar solo el total de números en un cuadro de diálogo
+        JOptionPane.showMessageDialog(null, "Archivo Cargado de Manera Exitosa\nTotal de números: " + numeros.size(), "Resultado", JOptionPane.INFORMATION_MESSAGE);
+
+        // Llamar al método para cargar la tabla con los tamaños
+        cargarTabla(numeros);
+    }
     }//GEN-LAST:event_btnCargarActionPerformed
 
-    private static ArrayList<Integer> leerNumerosDesdeArchivo(File archivo) {
-        ArrayList<Integer> numeros = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
-            String linea;
-            while ((linea = br.readLine()) != null) {
-                linea = linea.trim(); // Eliminar espacios en blanco
-                if (!linea.isEmpty() && linea.endsWith(",")) {
-                    linea = linea.substring(0, linea.length() - 1); // Quitar la coma final
-                }
-                try {
-                    int numero = Integer.parseInt(linea);
-                    numeros.add(numero); // Agregar número al ArrayList
-                } catch (NumberFormatException e) {
-                    System.err.println("Número inválido ignorado: " + linea);
-                }
-            }
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error al leer el archivo.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        return numeros;
+    private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
+        // TODO add your handling code here:
+         DefaultTableModel model = (DefaultTableModel) Tabla.getModel();
+
+    for (int i = 0; i < model.getRowCount(); i++) {
+        int tam = (int) model.getValueAt(i, 1); // Obtener el tamaño de la fila
+        int[] subArray = Arrays.copyOfRange(numeros.stream().mapToInt(j -> j).toArray(), 0, tam);
+        int[] subArrayQS = Arrays.copyOf(subArray, subArray.length); // Copia para QuickSort
+
+        // Ejecutar en hilos separados
+        final int fila = i;
+        new Thread(() -> {
+            // Medir tiempo de Merge Sort
+            long startTimeMerge = System.nanoTime();
+            MergeSort.ordenar(subArray);
+            long endTimeMerge = System.nanoTime();
+            String tiempoMerge = MergeSort.formatearTiempo(endTimeMerge - startTimeMerge);
+            
+            // Medir tiempo de Quick Sort
+            long startTimeQuick = System.nanoTime();
+            QuickSort.ordenar(subArrayQS, 0, subArrayQS.length - 1);
+            long endTimeQuick = System.nanoTime();
+            String tiempoQuick = QuickSort.formatearTiempo(endTimeQuick - startTimeQuick);
+
+            // Actualizar la tabla en el hilo de Swing
+            SwingUtilities.invokeLater(() -> {
+                model.setValueAt(tiempoMerge, fila, 6);
+                model.setValueAt(tiempoQuick, fila, 7);
+            });
+        }).start();
     }
+    }//GEN-LAST:event_btnIniciarActionPerformed
+
+    private void btnExtraerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExtraerActionPerformed
+
+    }//GEN-LAST:event_btnExtraerActionPerformed
+
+    private static ArrayList<Integer> leerNumerosDesdeArchivo(File archivo) {
+    ArrayList<Integer> numeros = new ArrayList<>();
+    try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
+        String linea;
+        while ((linea = br.readLine()) != null) {
+            linea = linea.trim(); // Eliminar espacios en blanco
+            if (!linea.isEmpty() && linea.endsWith(",")) {
+                linea = linea.substring(0, linea.length() - 1); // Quitar la coma final
+            }
+            try {
+                int numero = Integer.parseInt(linea);
+                numeros.add(numero); // Agregar número al ArrayList
+            } catch (NumberFormatException e) {
+                System.err.println("Número inválido ignorado: " + linea);
+            }
+        }
+    } catch (IOException ex) {
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Error al leer el archivo.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    return numeros;
+}
+
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
