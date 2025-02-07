@@ -240,8 +240,7 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCargarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        SelectionSort metodoordeenamientosort = new SelectionSort();
-        metodoordeenamientosort.start();
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
