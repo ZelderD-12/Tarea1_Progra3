@@ -41,14 +41,17 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     //Invocacion de ordenamientos
     Heap demo = new Heap(arrayOriginal);
     Insert demo1 = new Insert(arrayOriginal);
-   
+   Bubble demo4 = new Bubble  (arrayOriginal);
+    Counting demo5 = new Counting  (arrayOriginal);
 
     //Creacion de hilos
     Thread hiloReproduccion = new Thread(reproductor);
     Thread hilodegeneradordenumeros = new Thread(manejador);
     Thread hiloOrdenamientoHeap = new Thread(demo);
     Thread hiloOrdenamientoInsert = new Thread(demo1);
-
+    Thread hiloOrdenamientoBubble = new Thread(demo4);
+    Thread hiloOrdenamientoCounting = new Thread(demo5);
+    
     DefaultTableModel st = new DefaultTableModel();
     
     
@@ -276,6 +279,8 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     }
     hiloOrdenamientoHeap.start();
     hiloOrdenamientoInsert.start();
+    hiloOrdenamientoBubble.start ();
+     hiloOrdenamientoCounting.start ();
     }//GEN-LAST:event_btnIniciarActionPerformed
 
     private void btnExtraerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExtraerActionPerformed
