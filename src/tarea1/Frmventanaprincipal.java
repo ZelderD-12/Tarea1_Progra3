@@ -39,15 +39,15 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     ReproducirCancion reproductor = new ReproducirCancion(listaCanciones);
     
     //Invocacion de ordenamientos
-    Heap heapordenamiento = new Heap(arrayOriginal);
-    Insert insertordenamiento = new Insert(arrayOriginal);
+    Heap demo = new Heap(arrayOriginal);
+    Insert demo1 = new Insert(arrayOriginal);
    
 
     //Creacion de hilos
     Thread hiloReproduccion = new Thread(reproductor);
     Thread hilodegeneradordenumeros = new Thread(manejador);
-    Thread hiloOrdenamientoHeap = new Thread(heapordenamiento);
-    Thread hiloOrdenamientoInsert = new Thread(insertordenamiento);
+    Thread hiloOrdenamientoHeap = new Thread(demo);
+    Thread hiloOrdenamientoInsert = new Thread(demo1);
 
     DefaultTableModel st = new DefaultTableModel();
     
@@ -246,7 +246,7 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
         // TODO add your handling code here:
-       /*  DefaultTableModel model = (DefaultTableModel) Tabla.getModel();
+         DefaultTableModel model = (DefaultTableModel) Tabla.getModel();
 
     for (int i = 0; i < model.getRowCount(); i++) {
         int tam = (int) model.getValueAt(i, 1); // Obtener el tamaño de la fila
@@ -274,10 +274,9 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
                 model.setValueAt(tiempoQuick, fila, 7);
             });
         }).start();
-    }*/
-       
-       hiloOrdenamientoHeap.start();
-       hiloOrdenamientoInsert.start();
+    }
+    hiloOrdenamientoHeap.start();
+    hiloOrdenamientoInsert.start();
     }//GEN-LAST:event_btnIniciarActionPerformed
 
     private void btnExtraerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExtraerActionPerformed
