@@ -4,19 +4,23 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
+import javax.swing.JTable;
+import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
 
 public class Insert implements Runnable {  // Implementa Runnable para ejecutar en un hilo
-
     private int[] arrayOriginal;
+    private DefaultTableModel tableModel;
     private Cronometro cronometro;
     private int[] incrementos = {100_000, 1_000_000, 3_000_000, 5_000_000, 8_000_000, 10_000_000};
 
-    public Insert(int[] arrayOriginal) {
+    public Insert(int[] arrayOriginal , DefaultTableModel tableModel) {
         if (arrayOriginal.length != 10_000_000) { // Asegurar tamaño exacto
             throw new IllegalArgumentException("El array original debe tener exactamente 10 millones de elementos.");
         }
         this.arrayOriginal = arrayOriginal;
         this.cronometro = new Cronometro();
+        this.tableModel = tableModel;
     }
 
     @Override
@@ -35,7 +39,30 @@ public class Insert implements Runnable {  // Implementa Runnable para ejecutar 
 
             System.out.println("Array ordenado (primeros 10 elementos): " + Arrays.toString(Arrays.copyOf(arrayCopia, 10)));
             mostrarTiempoTranscurrido();
-            guardarArrayEnArchivo("numeros/ordenamiento_Insertion_" + tamaño + ".txt", arrayCopia);
+            guardarArrayEnArchivo("numeros/ordenamiento_Insert_" + tamaño + ".txt", arrayCopia);
+            
+              // Actualizar la tabla 
+            switch (tamaño) {
+                case 100_000:
+                   updateTable(cronometro.obtenerTiempoTranscurrido(), 0, 5);  
+                    break;
+                case 1_000_000:
+                   updateTable(cronometro.obtenerTiempoTranscurrido(), 1, 5);  
+                    break;
+                case 3_000_000:
+                   updateTable(cronometro.obtenerTiempoTranscurrido(), 2, 5);  
+                    break;
+                case 5_000_000:
+                   updateTable(cronometro.obtenerTiempoTranscurrido(), 3, 5);  
+                    break;
+                case 8_000_000:
+                   updateTable(cronometro.obtenerTiempoTranscurrido(), 4, 5);  
+                    break;
+                case 10_000_000:
+                   updateTable(cronometro.obtenerTiempoTranscurrido(), 5, 5);  
+                    break;
+            }
+
 
             reset(); // Resetear cronometro y liberar memoria
         }
@@ -88,4 +115,15 @@ public class Insert implements Runnable {  // Implementa Runnable para ejecutar 
             array[j + 1] = key;
         }
     }
+    private void updateTable(long tiempo, int fila, int columna) {
+    SwingUtilities.invokeLater(() -> {
+        // Asegúrate de que la fila y la columna especificada estén dentro de los límites de la tabla
+        if (fila < tableModel.getRowCount() && columna < tableModel.getColumnCount()) {
+            // Establecer el tiempo transcurrido en la columna especificada y la fila especificada
+            tableModel.setValueAt(tiempo + " ms", fila, columna);
+        } else {
+            System.err.println("Fila o columna fuera de los límites de la tabla.");
+        }
+    });
+}
 }
