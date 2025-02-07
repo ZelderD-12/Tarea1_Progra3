@@ -43,6 +43,8 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     Insert demo1 = new Insert(arrayOriginal);
     SelectionSort demo2 = new SelectionSort(arrayOriginal);
     ShellSort demo3 = new ShellSort(arrayOriginal);
+    Bubble demo4 = new Bubble  (arrayOriginal);
+    Counting demo5 = new Counting  (arrayOriginal);
 
     //Creacion de hilos
     Thread hiloReproduccion = new Thread(reproductor);
@@ -51,6 +53,8 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     Thread hiloOrdenamientoInsert = new Thread(demo1);
     Thread hiloOrdernamientoSelect = new Thread(demo2);
     Thread hiloOrdenamientoShell = new Thread(demo3);
+    Thread hiloOrdenamientoBubble = new Thread(demo4);
+    Thread hiloOrdenamientoCounting = new Thread(demo5);
 
     DefaultTableModel st = new DefaultTableModel();
     
