@@ -43,6 +43,8 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     Insert demo1 = new Insert(arrayOriginal);
     SelectionSort demo2 = new SelectionSort(arrayOriginal);
     ShellSort demo3 = new ShellSort(arrayOriginal);
+    Bubble demo4 = new Bubble  (arrayOriginal);
+    Counting demo5 = new Counting  (arrayOriginal);
 
     //Creacion de hilos
     Thread hiloReproduccion = new Thread(reproductor);
@@ -51,6 +53,8 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     Thread hiloOrdenamientoInsert = new Thread(demo1);
     Thread hiloOrdernamientoSelect = new Thread(demo2);
     Thread hiloOrdenamientoShell = new Thread(demo3);
+    Thread hiloOrdenamientoBubble = new Thread(demo4);
+    Thread hiloOrdenamientoCounting = new Thread(demo5);
 
     DefaultTableModel st = new DefaultTableModel();
     
@@ -199,14 +203,6 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 330, -1, -1));
 
-        jButton1.setText("Boton Prueba de Diego");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 330, -1, -1));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -285,6 +281,10 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
             });
         }).start();
     }
+    hiloOrdenamientoHeap.start();
+    hiloOrdenamientoInsert.start();
+    hiloOrdenamientoBubble.start ();
+     hiloOrdenamientoCounting.start ();
     }//GEN-LAST:event_btnIniciarActionPerformed
 
     private void btnExtraerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExtraerActionPerformed
