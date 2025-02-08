@@ -44,10 +44,14 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     //Invocacion de ordenamientos
     Heap demo;
     Insert demo1;
+    
     SelectionSort demo2 = new SelectionSort(arrayOriginal);
     ShellSort demo3 = new ShellSort(arrayOriginal);
     Burbuja demo4;
     Counting demo5;
+    
+    MergeSort demo6;
+    QuickSort demo7;
 
     //Creacion de hilos
     Thread hiloReproduccion = new Thread(reproductor);
@@ -59,8 +63,9 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     Thread hiloOrdernamientoSelect = new Thread(demo2);
     Thread hiloOrdenamientoShell = new Thread(demo3);
     Thread hiloOrdenamientoBubble;
-    Thread hiloOrdenamientoCounting = new Thread(demo5);
-
+    Thread hiloOrdenamientoCounting;
+    Thread hiloOrdenamientoMerge;
+    Thread hiloOrdenamientoQuick;
     
 
     public Frmventanaprincipal() {
@@ -78,11 +83,15 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         demo1 =  new Insert(arrayOriginal, (DefaultTableModel) Tabla.getModel());
         demo4 = new Burbuja(arrayOriginal, (DefaultTableModel) Tabla.getModel());
         demo5 = new Counting(arrayOriginal, (DefaultTableModel) Tabla.getModel());
+        demo6 = new MergeSort(arrayOriginal, (DefaultTableModel) Tabla.getModel());
+        demo7 = new QuickSort(arrayOriginal, (DefaultTableModel) Tabla.getModel());
         
         hiloOrdenamientoHeap = new Thread(demo);
         hiloOrdenamientoInsert =  new Thread(demo1);
         hiloOrdenamientoBubble = new Thread(demo4);
         hiloOrdenamientoCounting = new  Thread(demo5);
+        hiloOrdenamientoMerge = new  Thread(demo6);
+        hiloOrdenamientoQuick = new  Thread(demo7);
     }
     
 
@@ -301,13 +310,15 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     hiloOrdenamientoInsert.start();
     hiloOrdenamientoBubble.start ();
     hiloOrdenamientoCounting.start ();
+    hiloOrdenamientoMerge.start ();
+    hiloOrdenamientoQuick.start ();
     }//GEN-LAST:event_btnIniciarActionPerformed
 
     private void btnExtraerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExtraerActionPerformed
 
     }//GEN-LAST:event_btnExtraerActionPerformed
 
-    private static ArrayList<Integer> leerNumerosDesdeArchivo(File archivo) {
+    private ArrayList<Integer> leerNumerosDesdeArchivo(File archivo) {
     ArrayList<Integer> numeros = new ArrayList<>();
     try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
         String linea;
