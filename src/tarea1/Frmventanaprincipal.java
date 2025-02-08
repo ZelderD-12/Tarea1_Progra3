@@ -106,9 +106,9 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         btnIniciar = new javax.swing.JButton();
-        btnExtraer = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Tipos de Ordenamiento");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -172,16 +172,6 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         });
         jPanel1.add(btnIniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 310, -1, -1));
 
-        btnExtraer.setBackground(new java.awt.Color(255, 204, 51));
-        btnExtraer.setFont(new java.awt.Font("Tw Cen MT", 0, 14)); // NOI18N
-        btnExtraer.setText("Extraer datos");
-        btnExtraer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExtraerActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnExtraer, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 390, -1, -1));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -240,10 +230,6 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         hiloOrdenamientoSelection.start();
         
     }//GEN-LAST:event_btnIniciarActionPerformed
-
-    private void btnExtraerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExtraerActionPerformed
-
-    }//GEN-LAST:event_btnExtraerActionPerformed
 
     private ArrayList<Integer> leerNumerosDesdeArchivo(File archivo) {
         ArrayList<Integer> numeros = new ArrayList<>();
@@ -304,7 +290,6 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     private javax.swing.JTable Tabla;
     private javax.swing.JButton btnCargar;
     private javax.swing.JButton btnCrear;
-    private javax.swing.JButton btnExtraer;
     private javax.swing.JButton btnIniciar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
