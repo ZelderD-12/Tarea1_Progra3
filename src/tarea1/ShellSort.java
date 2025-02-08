@@ -1,48 +1,76 @@
-
 package tarea1;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
+import javax.swing.JTable;
+import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
 
-public class ShellSort extends Thread{
-    
-     private int[] arrayOriginal;
+public class ShellSort implements Runnable {  // Implementa Runnable para ejecutar en un hilo
+
+    private int[] arrayOriginal;
     private Cronometro cronometro;
+    private DefaultTableModel tableModel;
     private int[] incrementos = {100_000, 1_000_000, 3_000_000, 5_000_000, 8_000_000, 10_000_000};
-    
-    public ShellSort(int[] arrayOriginal) {
+
+    public ShellSort(int[] arrayOriginal , DefaultTableModel tableModel) {
         if (arrayOriginal.length != 10_000_000) { // Asegurar tamaño exacto
             throw new IllegalArgumentException("El array original debe tener exactamente 10 millones de elementos.");
         }
         this.arrayOriginal = arrayOriginal;
-        this.cronometro = new Cronometro();
+        this.cronometro = new Cronometro();    
+        this.tableModel = tableModel;
     }
-    
-    
-        @Override
-    public void run(){
-        int n = arrayOriginal.length;
 
-        // Comienza con un intervalo grande y reduce el intervalo a la mitad en cada iteración
-        for (int gap = n / 2; gap > 0; gap /= 2) {
-            // Realiza una inserción de elementos usando el intervalo (gap)
-            for (int i = gap; i < n; i++) {
-                int temp = arrayOriginal[i];
-                int j = i;
+    @Override
+    public void run() {  // Método run() que se ejecutará en el hilo
+        iniciarOrdenamiento();
+    }
 
-                // Mueve los elementos arr[0..i-gap] que son mayores que temp
-                while (j >= gap && arrayOriginal[j - gap] > temp) {
-                    arrayOriginal[j] = arrayOriginal[j - gap];
-                    j -= gap;
-                }
-                arrayOriginal[j] = temp;
+    public void iniciarOrdenamiento() {
+        for (int tamaño : incrementos) {
+            int[] arrayCopia = Arrays.copyOf(arrayOriginal, tamaño);
+            System.out.println("Preparando para ordenar " + tamaño + " elementos...");
+
+            cronometro.iniciar();
+            shellSort(arrayCopia);  // Cambié heapSort por shellSort
+            cronometro.detener();
+
+            System.out.println("Array ordenado (primeros 10 elementos): " + Arrays.toString(Arrays.copyOf(arrayCopia, 10)));
+            mostrarTiempoTranscurrido();
+               // Almacenar el tiempo transcurrido antes de reiniciar
+            cronometro.almacenarTiempo();
+            guardarArrayEnArchivo("numeros/ordenamiento_Shell_" + tamaño + ".txt", arrayCopia);
+
+            // Actualizar la tabla 
+            switch (tamaño) {
+                case 100_000:
+                   updateTable(cronometro.obtenerTiempoTranscurrido(), 0, 9);  
+                    break;
+                case 1_000_000:
+                   updateTable(cronometro.obtenerTiempoTranscurrido(), 1, 9);  
+                    break;
+                case 3_000_000:
+                   updateTable(cronometro.obtenerTiempoTranscurrido(), 2, 9);  
+                    break;
+                case 5_000_000:
+                   updateTable(cronometro.obtenerTiempoTranscurrido(), 3, 9);  
+                    break;
+                case 8_000_000:
+                   updateTable(cronometro.obtenerTiempoTranscurrido(), 4, 9);  
+                    break;
+                case 10_000_000:
+                   updateTable(cronometro.obtenerTiempoTranscurrido(), 5, 9);  
+                    break;
             }
+
+            reset(); // Resetear cronometro y liberar memoria
         }
-    };
-    
-    
+        System.out.println("Todos los incrementos han sido procesados.");
+    }
+
     public void mostrarTiempoTranscurrido() {
         System.out.println("Tiempo transcurrido: " + cronometro.obtenerTiempoTranscurrido() + " ms");
     }
@@ -57,7 +85,7 @@ public class ShellSort extends Thread{
         System.gc();
         System.out.println("Memoria liberada.");
     }
-    
+
     public void guardarArrayEnArchivo(String rutaArchivo, int[] array) {
         File carpeta = new File("numeros");
         if (!carpeta.exists()) {
@@ -72,5 +100,37 @@ public class ShellSort extends Thread{
         } catch (IOException e) {
             System.err.println("Error al guardar el archivo: " + e.getMessage());
         }
+    }
+
+    // Implementación del algoritmo Shell Sort
+    private void shellSort(int[] array) {
+        int n = array.length;
+
+        // Empezar con un gran incremento y reducirlo
+        for (int gap = n / 2; gap > 0; gap /= 2) {
+            // Hacer una inserción en sublistas creadas por el gap
+            for (int i = gap; i < n; i++) {
+                int temp = array[i];
+                int j = i;
+                // Ordenar elementos en sublistas
+                while (j >= gap && array[j - gap] > temp) {
+                    array[j] = array[j - gap];
+                    j -= gap;
+                }
+                array[j] = temp;
+            }
+        }
+    }
+
+    private void updateTable(long tiempo, int fila, int columna) {
+        SwingUtilities.invokeLater(() -> {
+            // Asegúrate de que la fila y la columna especificada estén dentro de los límites de la tabla
+            if (fila < tableModel.getRowCount() && columna < tableModel.getColumnCount()) {
+                // Establecer el tiempo transcurrido en la columna especificada y la fila especificada
+                tableModel.setValueAt(tiempo + " ms", fila, columna);
+            } else {
+                System.err.println("Fila o columna fuera de los límites de la tabla.");
+            }
+        });
     }
 }
