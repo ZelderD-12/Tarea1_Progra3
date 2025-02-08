@@ -64,12 +64,12 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     Thread hiloOrdenamientoQuick;
 
     public Frmventanaprincipal() {
-        Random random = new Random();
+        /*Random random = new Random();
         for (int i = 0; i < arrayOriginal.length; i++) {
             arrayOriginal[i] = random.nextInt();
-        }
+        }*/
         //hilo de la musica pero se dañaz al subir al git hub para que no salagan error
-        //hiloReproduccion.start();
+        hiloReproduccion.start();
         initComponents();
         datos = new DAtosTabala(Tabla);
 

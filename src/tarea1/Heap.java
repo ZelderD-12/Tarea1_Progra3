@@ -8,7 +8,7 @@ import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
-public class Heap implements Runnable {  // Implementa Runnable para ejecutar en un hilo
+public class Heap implements Runnable {  
 
     private int[] arrayOriginal;
     private Cronometro cronometro;
@@ -121,7 +121,6 @@ public class Heap implements Runnable {  // Implementa Runnable para ejecutar en
         }
     }
 
-    // Heapify iterativo para evitar desbordamiento de pila
     private void heapify(int[] array, int n, int i) {
         int current = i;
         while (true) {
@@ -146,9 +145,7 @@ public class Heap implements Runnable {  // Implementa Runnable para ejecutar en
 
    private void updateTable(long tiempo, int fila, int columna) {
     SwingUtilities.invokeLater(() -> {
-        // Asegúrate de que la fila y la columna especificada estén dentro de los límites de la tabla
         if (fila < tableModel.getRowCount() && columna < tableModel.getColumnCount()) {
-            // Establecer el tiempo transcurrido en la columna especificada y la fila especificada
             tableModel.setValueAt(tiempo + " ms", fila, columna);
         } else {
             System.err.println("Fila o columna fuera de los límites de la tabla.");

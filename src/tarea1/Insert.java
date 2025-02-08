@@ -117,9 +117,7 @@ public class Insert implements Runnable {  // Implementa Runnable para ejecutar 
     }
     private void updateTable(long tiempo, int fila, int columna) {
     SwingUtilities.invokeLater(() -> {
-        // Asegúrate de que la fila y la columna especificada estén dentro de los límites de la tabla
         if (fila < tableModel.getRowCount() && columna < tableModel.getColumnCount()) {
-            // Establecer el tiempo transcurrido en la columna especificada y la fila especificada
             tableModel.setValueAt(tiempo + " ms", fila, columna);
         } else {
             System.err.println("Fila o columna fuera de los límites de la tabla.");
