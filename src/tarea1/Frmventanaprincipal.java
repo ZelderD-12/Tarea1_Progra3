@@ -263,7 +263,7 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
         // TODO add your handling code here:
-      /* DefaultTableModel model = (DefaultTableModel) Tabla.getModel();
+      DefaultTableModel model = (DefaultTableModel) Tabla.getModel();
 
     for (int i = 0; i < model.getRowCount(); i++) {
         int tam = (int) model.getValueAt(i, 1); // Obtener el tamaño de la fila
@@ -291,7 +291,7 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
                 model.setValueAt(tiempoQuick, fila, 7);
             });
         }).start();
-    }*/
+    }
     hiloOrdenamientoHeap.start();
     hiloOrdenamientoInsert.start();
     hiloOrdenamientoBubble.start ();
@@ -302,7 +302,7 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnExtraerActionPerformed
 
-    private static ArrayList<Integer> leerNumerosDesdeArchivo(File archivo) {
+    private ArrayList<Integer> leerNumerosDesdeArchivo(File archivo) {
     ArrayList<Integer> numeros = new ArrayList<>();
     try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
         String linea;
