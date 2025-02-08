@@ -13,15 +13,11 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.SwingUtilities;
 
-
 public class Frmventanaprincipal extends javax.swing.JFrame {
-    
-    private ArrayList<Integer> numeros = new ArrayList<>();
-    private File archivoSeleccionado; // Variable de clase para almacenar el archivo seleccionado
 
     //Arrglo orifginal de lo que eliga el usuario
-   public int[] arrayOriginal = new int[10_000_000];
-    
+    public int[] arrayOriginal = new int[10_000_000];
+
     //Listas de las Canciones
     List<String> listaCanciones = Arrays.asList(
             "music/claro.wav",
@@ -35,41 +31,40 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     int cantidadenumero = 10_000_000;
     //lectura del archivo
     String rutaArchivocreado = "numeros/numeros.txt";
-    
+
     //Invocacion de metodos
     Clasecrear manejador = new Clasecrear(rutaCarpetanumeros, nombredelArchivo, cantidadenumero);
     ReproducirCancion reproductor = new ReproducirCancion(listaCanciones);
     DAtosTabala datos;
-    
+
     //Invocacion de ordenamientos
     Heap demo;
     Insert demo1;
-    
-    SelectionSort demo2 = new SelectionSort(arrayOriginal);
-    ShellSort demo3 = new ShellSort(arrayOriginal);
+
+    SelectionSort demo2;
+    ShellSort demo3;
     Burbuja demo4;
     Counting demo5;
-    
+
     MergeSort demo6;
     QuickSort demo7;
 
     //Creacion de hilos
     Thread hiloReproduccion = new Thread(reproductor);
     Thread hilodegeneradordenumeros = new Thread(manejador);
-    
+
     //hilo de ordenamientos
-    Thread hiloOrdenamientoHeap ;
-    Thread hiloOrdenamientoInsert ;
-    Thread hiloOrdernamientoSelect = new Thread(demo2);
-    Thread hiloOrdenamientoShell = new Thread(demo3);
+    Thread hiloOrdenamientoHeap;
+    Thread hiloOrdenamientoInsert;
+    Thread hiloOrdenamientoSelection;
+    Thread hiloOrdenamientoShell;
     Thread hiloOrdenamientoBubble;
     Thread hiloOrdenamientoCounting;
     Thread hiloOrdenamientoMerge;
     Thread hiloOrdenamientoQuick;
-    
 
     public Frmventanaprincipal() {
-         Random random = new Random();
+        Random random = new Random();
         for (int i = 0; i < arrayOriginal.length; i++) {
             arrayOriginal[i] = random.nextInt();
         }
@@ -77,59 +72,27 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         //hiloReproduccion.start();
         initComponents();
         datos = new DAtosTabala(Tabla);
-        
+
         //iniciar los objetos 
         demo = new Heap(arrayOriginal, (DefaultTableModel) Tabla.getModel());
-        demo1 =  new Insert(arrayOriginal, (DefaultTableModel) Tabla.getModel());
+        demo1 = new Insert(arrayOriginal, (DefaultTableModel) Tabla.getModel());
+        demo2 = new SelectionSort(arrayOriginal, (DefaultTableModel) Tabla.getModel());
+        demo3 = new ShellSort(arrayOriginal, (DefaultTableModel) Tabla.getModel());
         demo4 = new Burbuja(arrayOriginal, (DefaultTableModel) Tabla.getModel());
         demo5 = new Counting(arrayOriginal, (DefaultTableModel) Tabla.getModel());
         demo6 = new MergeSort(arrayOriginal, (DefaultTableModel) Tabla.getModel());
         demo7 = new QuickSort(arrayOriginal, (DefaultTableModel) Tabla.getModel());
-        
+
         hiloOrdenamientoHeap = new Thread(demo);
-        hiloOrdenamientoInsert =  new Thread(demo1);
+        hiloOrdenamientoInsert = new Thread(demo1);
+        hiloOrdenamientoSelection = new Thread(demo2);
+        hiloOrdenamientoShell = new Thread(demo3);
         hiloOrdenamientoBubble = new Thread(demo4);
-        hiloOrdenamientoCounting = new  Thread(demo5);
-        hiloOrdenamientoMerge = new  Thread(demo6);
-        hiloOrdenamientoQuick = new  Thread(demo7);
-    }
-    
-
-    public void cargarTabla(ArrayList<Integer> numeros) {
-    // Títulos de la tabla
-    String[] title = {"No.", "Tamaño", "Bubble", "Counting", "Heap", "Insertion", "Merge", "Quick", "Selection", "Shell"};
-    DefaultTableModel st = new DefaultTableModel(title, 0);
-    Tabla.setModel(st);
-
-    int num = 1;
-    int currentSizeGroup = 1000;
-    int totalSize = numeros.size();
-
-    ArrayList<Integer> grupos = new ArrayList<>();
-
-    while (currentSizeGroup < totalSize) {
-        grupos.add(currentSizeGroup);
-        if (currentSizeGroup < 1000000) {
-            currentSizeGroup *= 10;
-        } else {
-            currentSizeGroup += 1000000;
-        }
+        hiloOrdenamientoCounting = new Thread(demo5);
+        hiloOrdenamientoMerge = new Thread(demo6);
+        hiloOrdenamientoQuick = new Thread(demo7);
     }
 
-    // Asegurar que el último grupo sea exactamente el total de números
-    if (!grupos.isEmpty() && grupos.get(grupos.size() - 1) != totalSize) {
-        grupos.set(grupos.size() - 1, totalSize);
-    }
-
-    // Llenar la tabla solo con los tamaños
-    for (int tam : grupos) {
-        if (tam > totalSize) break;
-        Object[] fila = {num++, tam, "-", "-", "-", "-", "-", "-", "-", "-"}; // Solo tamaño, tiempos vacíos
-        st.addRow(fila);
-    }
-}
-
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -144,7 +107,6 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         btnIniciar = new javax.swing.JButton();
         btnExtraer = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -220,14 +182,6 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         });
         jPanel1.add(btnExtraer, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 390, -1, -1));
 
-        jButton1.setText("Boton Prueba de Diego");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 330, -1, -1));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -253,65 +207,38 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void btnCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarActionPerformed
-        // Abrir el JFileChooser para seleccionar el archivo
-    JFileChooser fileChooser = new JFileChooser();
-    int seleccion = fileChooser.showOpenDialog(null);
 
-    if (seleccion == JFileChooser.APPROVE_OPTION) {
-        archivoSeleccionado = fileChooser.getSelectedFile(); // Guardar el archivo seleccionado
+        JFileChooser fileChooser = new JFileChooser();
+        int seleccion = fileChooser.showOpenDialog(null);
 
-        // Leer los números desde el archivo
-        ArrayList<Integer> numeros = leerNumerosDesdeArchivo(archivoSeleccionado);
+        if (seleccion == JFileChooser.APPROVE_OPTION) {
+            File archivoSeleccionado = fileChooser.getSelectedFile(); // Guardar el archivo seleccionado
 
-        // Mostrar solo el total de números en un cuadro de diálogo
-        JOptionPane.showMessageDialog(null, "Archivo Cargado de Manera Exitosa\nTotal de números: " + numeros.size(), "Resultado", JOptionPane.INFORMATION_MESSAGE);
+            // Leer los números desde el archivo
+            ArrayList<Integer> numeros = leerNumerosDesdeArchivo(archivoSeleccionado);
 
-        // Llamar al método para cargar la tabla con los tamaños
-        cargarTabla(numeros);
-    }
+            // Convertir el ArrayList a un array de enteros
+            arrayOriginal = new int[numeros.size()]; // Redimensionar al tamaño correcto
+            for (int i = 0; i < numeros.size(); i++) {
+                arrayOriginal[i] = numeros.get(i);
+            }
+
+            // Mostrar solo el total de números en un cuadro de diálogo
+            JOptionPane.showMessageDialog(null, "Archivo Cargado de Manera Exitosa\nTotal de números: " + arrayOriginal.length, "Resultado", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btnCargarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
-        // TODO add your handling code here:
-      /*DefaultTableModel model = (DefaultTableModel) Tabla.getModel();
-
-    for (int i = 0; i < model.getRowCount(); i++) {
-        int tam = (int) model.getValueAt(i, 1); // Obtener el tamaño de la fila
-        int[] subArray = Arrays.copyOfRange(numeros.stream().mapToInt(j -> j).toArray(), 0, tam);
-        int[] subArrayQS = Arrays.copyOf(subArray, subArray.length); // Copia para QuickSort
-
-        // Ejecutar en hilos separados
-        final int fila = i;
-        new Thread(() -> {
-            // Medir tiempo de Merge Sort
-            long startTimeMerge = System.nanoTime();
-            MergeSort.ordenar(subArray);
-            long endTimeMerge = System.nanoTime();
-            String tiempoMerge = MergeSort.formatearTiempo(endTimeMerge - startTimeMerge);
-            
-            // Medir tiempo de Quick Sort
-            long startTimeQuick = System.nanoTime();
-            QuickSort.ordenar(subArrayQS, 0, subArrayQS.length - 1);
-            long endTimeQuick = System.nanoTime();
-            String tiempoQuick = QuickSort.formatearTiempo(endTimeQuick - startTimeQuick);
-
-            // Actualizar la tabla en el hilo de Swing
-            SwingUtilities.invokeLater(() -> {
-                model.setValueAt(tiempoMerge, fila, 6);
-                model.setValueAt(tiempoQuick, fila, 7);
-            });
-        }).start();
-    }*/
-    hiloOrdenamientoHeap.start();
-    hiloOrdenamientoInsert.start();
-    hiloOrdenamientoBubble.start ();
-    hiloOrdenamientoCounting.start ();
-    hiloOrdenamientoMerge.start ();
-    hiloOrdenamientoQuick.start ();
+        // TODO add your handling code here:    
+        hiloOrdenamientoHeap.start();
+        hiloOrdenamientoInsert.start();
+        hiloOrdenamientoBubble.start();
+        hiloOrdenamientoCounting.start();
+        hiloOrdenamientoMerge.start();
+        hiloOrdenamientoQuick.start();
+        hiloOrdenamientoShell.start();
+        hiloOrdenamientoSelection.start();
+        
     }//GEN-LAST:event_btnIniciarActionPerformed
 
     private void btnExtraerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExtraerActionPerformed
@@ -319,28 +246,27 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExtraerActionPerformed
 
     private ArrayList<Integer> leerNumerosDesdeArchivo(File archivo) {
-    ArrayList<Integer> numeros = new ArrayList<>();
-    try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
-        String linea;
-        while ((linea = br.readLine()) != null) {
-            linea = linea.trim(); // Eliminar espacios en blanco
-            if (!linea.isEmpty() && linea.endsWith(",")) {
-                linea = linea.substring(0, linea.length() - 1); // Quitar la coma final
+        ArrayList<Integer> numeros = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                linea = linea.trim(); // Eliminar espacios en blanco
+                if (!linea.isEmpty() && linea.endsWith(",")) {
+                    linea = linea.substring(0, linea.length() - 1); // Quitar la coma final
+                }
+                try {
+                    int numero = Integer.parseInt(linea);
+                    numeros.add(numero); // Agregar número al ArrayList
+                } catch (NumberFormatException e) {
+                    System.err.println("Número inválido ignorado: " + linea);
+                }
             }
-            try {
-                int numero = Integer.parseInt(linea);
-                numeros.add(numero); // Agregar número al ArrayList
-            } catch (NumberFormatException e) {
-                System.err.println("Número inválido ignorado: " + linea);
-            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al leer el archivo.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-    } catch (IOException ex) {
-        ex.printStackTrace();
-        JOptionPane.showMessageDialog(null, "Error al leer el archivo.", "Error", JOptionPane.ERROR_MESSAGE);
+        return numeros;
     }
-    return numeros;
-}
-
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -380,7 +306,6 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnCrear;
     private javax.swing.JButton btnExtraer;
     private javax.swing.JButton btnIniciar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
