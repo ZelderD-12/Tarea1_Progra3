@@ -41,8 +41,8 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     Heap demo;
     Insert demo1;
 
-    SelectionSort demo2 = new SelectionSort(arrayOriginal);
-    ShellSort demo3 = new ShellSort(arrayOriginal);
+    SelectionSort demo2;
+    ShellSort demo3;
     Burbuja demo4;
     Counting demo5;
 
@@ -56,8 +56,8 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     //hilo de ordenamientos
     Thread hiloOrdenamientoHeap;
     Thread hiloOrdenamientoInsert;
-    Thread hiloOrdernamientoSelect = new Thread(demo2);
-    Thread hiloOrdenamientoShell = new Thread(demo3);
+    Thread hiloOrdenamientoSelection;
+    Thread hiloOrdenamientoShell;
     Thread hiloOrdenamientoBubble;
     Thread hiloOrdenamientoCounting;
     Thread hiloOrdenamientoMerge;
@@ -76,6 +76,8 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         //iniciar los objetos 
         demo = new Heap(arrayOriginal, (DefaultTableModel) Tabla.getModel());
         demo1 = new Insert(arrayOriginal, (DefaultTableModel) Tabla.getModel());
+        demo2 = new SelectionSort(arrayOriginal, (DefaultTableModel) Tabla.getModel());
+        demo3 = new ShellSort(arrayOriginal, (DefaultTableModel) Tabla.getModel());
         demo4 = new Burbuja(arrayOriginal, (DefaultTableModel) Tabla.getModel());
         demo5 = new Counting(arrayOriginal, (DefaultTableModel) Tabla.getModel());
         demo6 = new MergeSort(arrayOriginal, (DefaultTableModel) Tabla.getModel());
@@ -83,6 +85,8 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
 
         hiloOrdenamientoHeap = new Thread(demo);
         hiloOrdenamientoInsert = new Thread(demo1);
+        hiloOrdenamientoSelection = new Thread(demo2);
+        hiloOrdenamientoShell = new Thread(demo3);
         hiloOrdenamientoBubble = new Thread(demo4);
         hiloOrdenamientoCounting = new Thread(demo5);
         hiloOrdenamientoMerge = new Thread(demo6);
@@ -103,7 +107,6 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         btnIniciar = new javax.swing.JButton();
         btnExtraer = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -179,14 +182,6 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         });
         jPanel1.add(btnExtraer, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 390, -1, -1));
 
-        jButton1.setText("Boton Prueba de Diego");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 330, -1, -1));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -233,10 +228,6 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCargarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
         // TODO add your handling code here:    
         hiloOrdenamientoHeap.start();
@@ -245,6 +236,9 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         hiloOrdenamientoCounting.start();
         hiloOrdenamientoMerge.start();
         hiloOrdenamientoQuick.start();
+        hiloOrdenamientoShell.start();
+        hiloOrdenamientoSelection.start();
+        
     }//GEN-LAST:event_btnIniciarActionPerformed
 
     private void btnExtraerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExtraerActionPerformed
@@ -312,7 +306,6 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnCrear;
     private javax.swing.JButton btnExtraer;
     private javax.swing.JButton btnIniciar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -47,22 +47,22 @@ public class MergeSort implements Runnable {
             // Actualizar la tabla 
             switch (tamaño) {
                 case 100_000:
-                   updateTable(cronometro.obtenerTiempoTranscurrido(), 0, 4);  
+                   updateTable(cronometro.obtenerTiempoTranscurrido(), 0, 6);  
                     break;
                 case 1_000_000:
-                   updateTable(cronometro.obtenerTiempoTranscurrido(), 1, 4);  
+                   updateTable(cronometro.obtenerTiempoTranscurrido(), 1, 6);  
                     break;
                 case 3_000_000:
-                   updateTable(cronometro.obtenerTiempoTranscurrido(), 2, 4);  
+                   updateTable(cronometro.obtenerTiempoTranscurrido(), 2, 6);  
                     break;
                 case 5_000_000:
-                   updateTable(cronometro.obtenerTiempoTranscurrido(), 3, 4);  
+                   updateTable(cronometro.obtenerTiempoTranscurrido(), 3, 6);  
                     break;
                 case 8_000_000:
-                   updateTable(cronometro.obtenerTiempoTranscurrido(), 4, 4);  
+                   updateTable(cronometro.obtenerTiempoTranscurrido(), 4, 6);  
                     break;
                 case 10_000_000:
-                   updateTable(cronometro.obtenerTiempoTranscurrido(), 5, 4);  
+                   updateTable(cronometro.obtenerTiempoTranscurrido(), 5, 6);  
                     break;
             }
 
