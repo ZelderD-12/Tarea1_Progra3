@@ -116,7 +116,7 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         btnCrear.setBackground(new java.awt.Color(255, 255, 102));
         btnCrear.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         btnCrear.setText("Crear");
-        btnCrear.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnCrear.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCrearActionPerformed(evt);
@@ -127,7 +127,7 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         btnCargar.setBackground(new java.awt.Color(255, 255, 102));
         btnCargar.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         btnCargar.setText("Cargar archivo");
-        btnCargar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnCargar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCargar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCargarActionPerformed(evt);
@@ -165,6 +165,7 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         btnIniciar.setBackground(new java.awt.Color(255, 102, 0));
         btnIniciar.setFont(new java.awt.Font("Tw Cen MT", 0, 48)); // NOI18N
         btnIniciar.setText("Iniciar");
+        btnIniciar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnIniciar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIniciarActionPerformed(evt);
