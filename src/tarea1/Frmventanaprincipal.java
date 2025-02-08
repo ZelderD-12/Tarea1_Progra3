@@ -46,7 +46,7 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     Insert demo1;
     SelectionSort demo2 = new SelectionSort(arrayOriginal);
     ShellSort demo3 = new ShellSort(arrayOriginal);
-    Bubble demo4 = new Bubble(arrayOriginal);
+    Burbuja demo4 = new Burbuja(arrayOriginal);
     Counting demo5 = new Counting(arrayOriginal);
 
     //Creacion de hilos
@@ -64,9 +64,10 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     
 
     public Frmventanaprincipal() {
-        
-        
-        
+       /*  Random random = new Random();
+        for (int i = 0; i < arrayOriginal.length; i++) {
+            arrayOriginal[i] = random.nextInt();
+        }*/
         //hilo de la musica pero se dañaz al subir al git hub para que no salagan error
         //hiloReproduccion.start();
         initComponents();
@@ -194,7 +195,7 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
                 btnIniciarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnIniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 290, -1, -1));
+        jPanel1.add(btnIniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 310, -1, -1));
 
         btnExtraer.setBackground(new java.awt.Color(255, 204, 51));
         btnExtraer.setFont(new java.awt.Font("Tw Cen MT", 0, 14)); // NOI18N
