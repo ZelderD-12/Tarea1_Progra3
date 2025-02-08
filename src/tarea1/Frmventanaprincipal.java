@@ -106,9 +106,9 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         btnIniciar = new javax.swing.JButton();
-        btnExtraer = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Tipos de Ordenamiento");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -116,7 +116,7 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         btnCrear.setBackground(new java.awt.Color(255, 255, 102));
         btnCrear.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         btnCrear.setText("Crear");
-        btnCrear.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnCrear.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCrearActionPerformed(evt);
@@ -127,7 +127,7 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         btnCargar.setBackground(new java.awt.Color(255, 255, 102));
         btnCargar.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         btnCargar.setText("Cargar archivo");
-        btnCargar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnCargar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCargar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCargarActionPerformed(evt);
@@ -165,22 +165,13 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         btnIniciar.setBackground(new java.awt.Color(255, 102, 0));
         btnIniciar.setFont(new java.awt.Font("Tw Cen MT", 0, 48)); // NOI18N
         btnIniciar.setText("Iniciar");
+        btnIniciar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnIniciar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIniciarActionPerformed(evt);
             }
         });
         jPanel1.add(btnIniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 310, -1, -1));
-
-        btnExtraer.setBackground(new java.awt.Color(255, 204, 51));
-        btnExtraer.setFont(new java.awt.Font("Tw Cen MT", 0, 14)); // NOI18N
-        btnExtraer.setText("Extraer datos");
-        btnExtraer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExtraerActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnExtraer, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 390, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -241,10 +232,6 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnIniciarActionPerformed
 
-    private void btnExtraerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExtraerActionPerformed
-
-    }//GEN-LAST:event_btnExtraerActionPerformed
-
     private ArrayList<Integer> leerNumerosDesdeArchivo(File archivo) {
         ArrayList<Integer> numeros = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
@@ -304,7 +291,6 @@ public class Frmventanaprincipal extends javax.swing.JFrame {
     private javax.swing.JTable Tabla;
     private javax.swing.JButton btnCargar;
     private javax.swing.JButton btnCrear;
-    private javax.swing.JButton btnExtraer;
     private javax.swing.JButton btnIniciar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
