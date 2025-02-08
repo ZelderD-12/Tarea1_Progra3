@@ -5,16 +5,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
 
-public class Clasecrear implements Runnable{
-      private String rutaRelativa;
+public class Clasecrear implements Runnable {
+    private String rutaRelativa;
     private String nombreArchivo;
     private int cantidad;
+    public int[] arrayOriginal; // Array público para almacenar los números generados
 
     // Constructor para inicializar los parámetros
     public Clasecrear(String rutaRelativa, String nombreArchivo, int cantidad) {
         this.rutaRelativa = rutaRelativa;
         this.nombreArchivo = nombreArchivo;
         this.cantidad = cantidad;
+        this.arrayOriginal = new int[cantidad]; // Inicializar el array con el tamaño especificado
     }
 
     @Override
@@ -36,6 +38,7 @@ public class Clasecrear implements Runnable{
 
             for (int i = 0; i < cantidad; i++) {
                 int numero = random.nextInt(1000000); // Números aleatorios entre 0 y 999,999
+                arrayOriginal[i] = numero; // Almacenar el número en el array
                 escritor.write(numero + ",\n"); // Escribe el número seguido de una coma y un salto de línea
             }
 
@@ -49,5 +52,10 @@ public class Clasecrear implements Runnable{
 
         // El hilo se detiene automáticamente al terminar el método run()
         System.out.println("Hilo de generación de números finalizado.");
+    }
+
+    // Método para obtener el arrayOriginal
+    public int[] getArrayOriginal() {
+        return arrayOriginal;
     }
 }
