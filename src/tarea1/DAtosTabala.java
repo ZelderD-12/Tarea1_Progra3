@@ -21,6 +21,6 @@ public class DAtosTabala {
     public void agregarElemento(String algoritmo, int tamaño, long tiempo) {
         DefaultTableModel model = (DefaultTableModel) ventana.getModel();
         Object[] rowData = {algoritmo, tamaño, tiempo};
-        model.addRow(rowData);  // Agregar al final de la tabla
+        model.addRow(rowData); 
     }
 }
